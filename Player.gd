@@ -6,11 +6,11 @@ func _ready():
 	pass
 
 func _process(delta):
-	if Input.is_action_just_pressed("ui_down"):
+	if Input.is_action_pressed("ui_down"):
 		tilemap_object.MoveDirection(Vector2i.DOWN)
-	if Input.is_action_just_pressed("ui_up"):
+	if Input.is_action_pressed("ui_up"):
 		tilemap_object.MoveDirection(Vector2i.UP)
-	if Input.is_action_just_pressed("ui_left"):
+	if Input.is_action_pressed("ui_left"):
 		tilemap_object.MoveDirection(Vector2i.LEFT)
-	if Input.is_action_just_pressed("ui_right"):
+	if Input.is_action_pressed("ui_right"):
 		tilemap_object.MoveDirection(Vector2i.RIGHT)	
