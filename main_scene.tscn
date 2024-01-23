@@ -1,15 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1s4kykt7sebs"]
+[gd_scene load_steps=7 format=3 uid="uid://c1s4kykt7sebs"]
 
 [ext_resource type="Texture2D" uid="uid://ci3y46116en3f" path="res://redcube.png" id="1_12xs2"]
 [ext_resource type="Texture2D" uid="uid://8qn276oaai32" path="res://test_image.png" id="1_fsc0j"]
 [ext_resource type="Script" path="res://TilemapObject.gd" id="2_avyxl"]
 [ext_resource type="Script" path="res://Player.gd" id="2_so2lg"]
+[ext_resource type="Texture2D" uid="uid://ccv6go4oo7uxk" path="res://d01.png" id="5_gfouj"]
 
 [sub_resource type="TileSet" id="TileSet_yrj0a"]
 
 [node name="MainScene" type="Node2D"]
 
 [node name="Player" type="Sprite2D" parent="."]
+top_level = true
 texture = ExtResource("1_12xs2")
 script = ExtResource("2_so2lg")
 
@@ -34,3 +36,7 @@ z_index = -5
 position = Vector2(5, 52)
 scale = Vector2(0.17443, 0.17443)
 texture = ExtResource("1_fsc0j")
+
+[node name="D01" type="Sprite2D" parent="."]
+position = Vector2(48, 98)
+texture = ExtResource("5_gfouj")
