@@ -1,9 +1,34 @@
-[gd_scene load_steps=2 format=3 uid="uid://c1s4kykt7sebs"]
+[gd_scene load_steps=6 format=3 uid="uid://c1s4kykt7sebs"]
 
+[ext_resource type="Texture2D" uid="uid://ci3y46116en3f" path="res://redcube.png" id="1_12xs2"]
 [ext_resource type="Texture2D" uid="uid://8qn276oaai32" path="res://test_image.png" id="1_fsc0j"]
+[ext_resource type="Script" path="res://TilemapObject.gd" id="2_avyxl"]
+[ext_resource type="Script" path="res://Player.gd" id="2_so2lg"]
+
+[sub_resource type="TileSet" id="TileSet_yrj0a"]
 
 [node name="MainScene" type="Node2D"]
 
+[node name="Player" type="Sprite2D" parent="."]
+position = Vector2(15, 26)
+texture = ExtResource("1_12xs2")
+script = ExtResource("2_so2lg")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 15.0
+
+[node name="TilemapObject" type="Node" parent="Player" node_paths=PackedStringArray("map")]
+script = ExtResource("2_avyxl")
+map = NodePath("../../TileMap")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_yrj0a")
+format = 2
+
 [node name="TestImage" type="Sprite2D" parent="."]
-position = Vector2(560, 326)
+z_index = -5
+position = Vector2(3, 16)
+scale = Vector2(0.17443, 0.17443)
 texture = ExtResource("1_fsc0j")
