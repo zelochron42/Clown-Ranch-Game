@@ -8,6 +8,7 @@ var parent : Node2D
 var is_tweening : bool = false
 
 func _ready(): #equivalent to Unity's Start() method, runs once at the start
+	map = get_tree().current_scene.find_child("TileMap")
 	parent = get_parent()
 	cell_position = map.local_to_map(parent.position)
 	goal_cell = cell_position
@@ -53,3 +54,7 @@ func MoveDirection(direction : Vector2i) -> Node: #Simple function that just run
 
 func _sync_parent(): #Snap the physical position of this object to its exact cell position
 	parent.position = map.map_to_local(cell_position)
+	
+func Remove():
+	map.objects.erase(parent)
+	parent.queue_free()

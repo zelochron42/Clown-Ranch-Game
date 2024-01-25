@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c1s4kykt7sebs"]
+[gd_scene load_steps=14 format=3 uid="uid://c1s4kykt7sebs"]
 
 [ext_resource type="Texture2D" uid="uid://ci3y46116en3f" path="res://redcube.png" id="1_12xs2"]
 [ext_resource type="Script" path="res://TilemapObject.gd" id="2_avyxl"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cff5pygu1bhld" path="res://laugh_face_back.png" id="8_jm57e"]
 [ext_resource type="Script" path="res://LaughMeter.gd" id="9_b507p"]
 [ext_resource type="Texture2D" uid="uid://ccrgyhm8lnuf7" path="res://laugh_face_purple.png" id="9_inxpc"]
+[ext_resource type="Script" path="res://Pathfinder.gd" id="11_tu8l2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4kkab"]
 texture = ExtResource("5_gfouj")
@@ -415,6 +416,7 @@ script = ExtResource("5_k8yc6")
 position = Vector2(-8, 120)
 texture = ExtResource("6_h406r")
 script = ExtResource("6_ckt2i")
+trailer_position = Vector2i(-12, 9)
 
 [node name="TilemapObject" type="Node" parent="Sheeple" node_paths=PackedStringArray("map")]
 script = ExtResource("2_avyxl")
@@ -440,3 +442,6 @@ script = ExtResource("9_b507p")
 process_callback = 0
 wait_time = 0.75
 autostart = true
+
+[node name="Pathfinder" type="Node" parent="Sheeple"]
+script = ExtResource("11_tu8l2")

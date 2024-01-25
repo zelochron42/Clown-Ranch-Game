@@ -5,7 +5,7 @@ extends Node
 @export var player_object : Node
 var astar : AStarGrid2D
 func _ready():
-	
+	tilemap = $"../../TileMap"
 	astar = AStarGrid2D.new()
 	var rect : Rect2i = tilemap.get_used_rect()
 	astar.region = rect
