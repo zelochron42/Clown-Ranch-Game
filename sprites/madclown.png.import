@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8qn276oaai32"
-path="res://.godot/imported/test_image.png-766335652dc2c2de5b8cec86a2845a37.ctex"
+uid="uid://cnugpn1u3ulk"
+path="res://.godot/imported/madclown.png-7d5625b79591fb1bec23696001d2c94f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://test_image.png"
-dest_files=["res://.godot/imported/test_image.png-766335652dc2c2de5b8cec86a2845a37.ctex"]
+source_file="res://sprites/madclown.png"
+dest_files=["res://.godot/imported/madclown.png-7d5625b79591fb1bec23696001d2c94f.ctex"]
 
 [params]
 

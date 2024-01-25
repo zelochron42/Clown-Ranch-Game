@@ -6,6 +6,7 @@ extends Node
 @export var move_time : float = 0.2 #time in seconds it takes to move from one tile to another
 var parent : Node2D
 var is_tweening : bool = false
+signal loaded
 
 func _ready(): #equivalent to Unity's Start() method, runs once at the start
 	map = get_tree().current_scene.find_child("TileMap")
@@ -14,6 +15,7 @@ func _ready(): #equivalent to Unity's Start() method, runs once at the start
 	goal_cell = cell_position
 	_sync_parent()
 	map.objects.append(parent) #adds parent to the list of moving objects tracked by GameMap.gd
+	loaded.emit() #signal that this node is ready to be used
 
 func MoveToCell(new_cell : Vector2i, ignore_objects : bool = false, override_movement : bool = false) -> Node:
 	#This function will attempt to tween this object to a specified cell

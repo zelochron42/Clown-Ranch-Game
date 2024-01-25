@@ -1,17 +1,16 @@
-[gd_scene load_steps=16 format=3 uid="uid://co6juaxukx7yl"]
+[gd_scene load_steps=15 format=3 uid="uid://co6juaxukx7yl"]
 
 [ext_resource type="Script" path="res://GameMap.gd" id="1_0bujn"]
-[ext_resource type="Texture2D" uid="uid://ci3y46116en3f" path="res://redcube.png" id="1_hu2dc"]
+[ext_resource type="Texture2D" uid="uid://ci3y46116en3f" path="res://sprites/redcube.png" id="1_hu2dc"]
 [ext_resource type="Script" path="res://Player.gd" id="2_su2wl"]
 [ext_resource type="Script" path="res://TilemapObject.gd" id="3_orwgm"]
-[ext_resource type="Texture2D" uid="uid://ccv6go4oo7uxk" path="res://d01.png" id="4_331fw"]
-[ext_resource type="Texture2D" uid="uid://cnlfcc36qkvrq" path="res://sheep_prototype.png" id="6_opxu7"]
-[ext_resource type="Script" path="res://SheepBehavior.gd" id="7_0xf5i"]
-[ext_resource type="Texture2D" uid="uid://cff5pygu1bhld" path="res://laugh_face_back.png" id="8_i4xd2"]
-[ext_resource type="Texture2D" uid="uid://ccrgyhm8lnuf7" path="res://laugh_face_purple.png" id="9_jwl76"]
+[ext_resource type="Texture2D" uid="uid://ccv6go4oo7uxk" path="res://sprites/d01.png" id="4_331fw"]
+[ext_resource type="Texture2D" uid="uid://cff5pygu1bhld" path="res://sprites/laugh_face_back.png" id="8_i4xd2"]
+[ext_resource type="Texture2D" uid="uid://ccrgyhm8lnuf7" path="res://sprites/laugh_face_purple.png" id="9_jwl76"]
 [ext_resource type="Script" path="res://LaughMeter.gd" id="10_3s3vo"]
 [ext_resource type="Script" path="res://Pathfinder.gd" id="11_bfjm0"]
-[ext_resource type="Texture2D" uid="uid://cnugpn1u3ulk" path="res://madclown.png" id="12_lsmbl"]
+[ext_resource type="Texture2D" uid="uid://cnugpn1u3ulk" path="res://sprites/madclown.png" id="12_lsmbl"]
+[ext_resource type="Script" path="res://EntitySpawner.gd" id="12_nt56t"]
 [ext_resource type="Script" path="res://AngryClown.gd" id="13_24mys"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4kkab"]
@@ -415,42 +414,6 @@ format = 2
 layer_0/tile_data = PackedInt32Array(0, 1048576, 0, 65536, 1310720, 4, 131072, 917504, 5, 196608, 917504, 5, 262144, 1507328, 9, 327680, 1310720, 7, 393216, 1245184, 3, 458752, 1310720, 7, 524288, 393216, 8, 589824, 917504, 5, 655360, 786432, 7, 720896, 1048576, 11, 1, 1114112, 0, 65537, 1310720, 4, 131073, 786432, 4, 196609, 917504, 5, 262145, 917504, 5, 327681, 1507328, 9, 393217, 393216, 8, 458753, 1245184, 3, 524289, 1507328, 2, 589825, 1245184, 3, 655361, 1245184, 3, 720897, 1114112, 11, 2, 1179648, 0, 65538, 983040, 9, 131074, 1507328, 2, 196610, 983040, 9, 262146, 1048576, 7, 327682, 1245184, 3, 393218, 786432, 4, 458754, 1310720, 4, 524290, 524288, 3, 589826, 983040, 9, 655362, 393216, 8, 720898, 1048576, 7, 3, 1245184, 0, 65539, 786432, 7, 131075, 393216, 8, 196611, 1310720, 7, 262147, 786432, 4, 327683, 524288, 3, 393219, 1310720, 7, 458755, 1310720, 7, 524291, 917504, 5, 589827, 786432, 7, 655363, 786432, 4, 720899, 524288, 3, 4, 1310720, 0, 65540, 1310720, 4, 131076, 1310720, 7, 196612, 524288, 3, 262148, 917504, 5, 327684, 1507328, 9, 393220, 1245184, 3, 458756, 917504, 5, 524292, 524288, 3, 589828, 786432, 4, 655364, 1245184, 3, 720900, 393216, 8, 5, 1376256, 0, 65541, 1310720, 4, 131077, 1507328, 2, 196613, 1310720, 4, 262149, 524288, 3, 327685, 1310720, 4, 393221, 786432, 4, 458757, 1507328, 9, 524293, 983040, 9, 589829, 393216, 8, 655365, 1245184, 3, 720901, 1376256, 11, 6, 1441792, 0, 65542, 917504, 5, 131078, 1310720, 4, 196614, 393216, 8, 262150, 1441792, 4, 327686, 1441792, 5, 393222, 917504, 5, 458758, 393216, 8, 524294, 917504, 5, 589830, 1310720, 4, 655366, 1507328, 9, 720902, 1441792, 11, 7, 786432, 4, 65543, 786432, 7, 131079, 786432, 4, 196615, 1507328, 9, 262151, 786432, 7, 327687, 1507328, 5, 393223, 393216, 8, 458759, 786432, 7, 524295, 1310720, 4, 589831, 1048576, 7, 655367, 393216, 8, 720903, 1507328, 11, 8, 786432, 7, 65544, 1310720, 7, 131080, 1310720, 4, 196616, 786432, 4, 262152, 1048576, 7, 327688, 1245184, 3, 393224, 1310720, 4, 458760, 786432, 4, 524296, 1507328, 2, 589832, 1245184, 3, 655368, 1572864, 10, 720904, 1572864, 11, 9, 1638400, 0, 65545, 1310720, 7, 131081, 1310720, 4, 196617, 1048576, 7, 262153, 1507328, 9, 327689, 1507328, 9, 393225, 1507328, 2, 458761, 393216, 8, 524297, 917504, 5, 589833, 1638400, 9, 655369, 1638400, 10, 720905, 1638400, 11, 10, 1703936, 0, 65546, 1703936, 1, 131082, 786432, 7, 196618, 524288, 3, 262154, 917504, 5, 327690, 786432, 4, 393226, 1507328, 9, 458762, 917504, 5, 524298, 1703936, 8, 589834, 1703936, 9, 655370, 1703936, 10, 720906, 1703936, 11, 11, 1769472, 0, 65547, 1769472, 1, 131083, 1507328, 2, 196619, 786432, 7, 262155, 1507328, 9, 327691, 393216, 8, 393227, 983040, 9, 458763, 1769472, 7, 524299, 1769472, 8, 589835, 1769472, 9, 655371, 1769472, 10, 720907, 1769472, 11, 12, 1835008, 0, 65548, 1835008, 1, 131084, 1835008, 2, 196620, 1835008, 3, 262156, 1835008, 4, 327692, 393216, 8, 393228, 1835008, 6, 458764, 1835008, 7, 524300, 1835008, 8, 589836, 393216, 8, 655372, 1835008, 10, 720908, 1835008, 11, 13, 1900544, 0, 65549, 393216, 8, 131085, 1900544, 2, 196621, 1900544, 3, 262157, 1900544, 4, 327693, 1900544, 5, 393229, 1900544, 6, 458765, 1900544, 7, 524301, 1900544, 8, 589837, 1900544, 9, 655373, 1900544, 10, 720909, 1900544, 11, 14, 589824, 8, 15, 589824, 8, 65551, 589824, 8, 131087, 589824, 8, 196623, 589824, 8, 262159, 589824, 8, 327695, 589824, 8, 393231, 589824, 8, 458767, 589824, 8, 524303, 589824, 8, 589839, 589824, 8, 655375, 393216, 8, 720911, 589824, 8, 720910, 589824, 8, 655374, 393216, 8, 589838, 589824, 8, 524302, 589824, 8, 458766, 589824, 8, 393230, 589824, 8, 327694, 589824, 8, 262158, 393216, 8, 196622, 589824, 8, 131086, 589824, 8, 65550, 589824, 8)
 script = ExtResource("1_0bujn")
 
-[node name="pathfindtestsheep" type="Sprite2D" parent="."]
-position = Vector2(103, 104)
-texture = ExtResource("6_opxu7")
-script = ExtResource("7_0xf5i")
-
-[node name="TilemapObject" type="Node" parent="pathfindtestsheep" node_paths=PackedStringArray("map")]
-script = ExtResource("3_orwgm")
-map = NodePath("../../TileMap")
-move_time = 0.8
-
-[node name="LaughMeter" type="TextureProgressBar" parent="pathfindtestsheep"]
-z_index = 2
-layout_direction = 1
-offset_left = -8.0
-offset_top = -26.0
-offset_right = 8.0
-offset_bottom = -10.0
-max_value = 16.0
-step = 0.1
-value = 16.0
-fill_mode = 3
-texture_under = ExtResource("8_i4xd2")
-texture_progress = ExtResource("9_jwl76")
-script = ExtResource("10_3s3vo")
-
-[node name="Timer" type="Timer" parent="pathfindtestsheep/LaughMeter"]
-process_callback = 0
-wait_time = 0.75
-autostart = true
-
-[node name="Pathfinder" type="Node" parent="pathfindtestsheep" node_paths=PackedStringArray("tilemap", "tilemap_object", "player_object")]
-script = ExtResource("11_bfjm0")
-tilemap = NodePath("../../TileMap")
-tilemap_object = NodePath("../TilemapObject")
-player_object = NodePath("../../Player/TilemapObject")
-
 [node name="AngryClown" type="Sprite2D" parent="."]
 position = Vector2(73, 86)
 texture = ExtResource("12_lsmbl")
@@ -464,7 +427,7 @@ move_time = 0.8
 [node name="Pathfinder" type="Node" parent="AngryClown" node_paths=PackedStringArray("tilemap", "tilemap_object", "player_object")]
 script = ExtResource("11_bfjm0")
 tilemap = NodePath("../../TileMap")
-tilemap_object = NodePath("../../pathfindtestsheep/TilemapObject")
+tilemap_object = NodePath("")
 player_object = NodePath("../../Player/TilemapObject")
 
 [node name="LaughMeter" type="TextureProgressBar" parent="AngryClown"]
@@ -486,3 +449,7 @@ script = ExtResource("10_3s3vo")
 process_callback = 0
 wait_time = 0.75
 autostart = true
+
+[node name="EntitySpawner" type="Node" parent="."]
+script = ExtResource("12_nt56t")
+sheep_zone = Rect2i(5, 3, 5, 3)

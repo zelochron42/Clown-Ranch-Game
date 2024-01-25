@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnugpn1u3ulk"
-path="res://.godot/imported/madclown.png-e70c7110d67daa554436bd6d539ceee6.ctex"
+uid="uid://ccrgyhm8lnuf7"
+path="res://.godot/imported/laugh_face_purple.png-b108d69dbc86a76faf47056098a8dc71.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://madclown.png"
-dest_files=["res://.godot/imported/madclown.png-e70c7110d67daa554436bd6d539ceee6.ctex"]
+source_file="res://sprites/laugh_face_purple.png"
+dest_files=["res://.godot/imported/laugh_face_purple.png-b108d69dbc86a76faf47056098a8dc71.ctex"]
 
 [params]
 

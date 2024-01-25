@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccv6go4oo7uxk"
-path="res://.godot/imported/d01.png-d14bb701a95e9183f9c261d9f30ab6a9.ctex"
+uid="uid://cru6d25lgjfqw"
+path="res://.godot/imported/laugh_face.png-9092d42e0e71a15212ea1b2b9f645628.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://d01.png"
-dest_files=["res://.godot/imported/d01.png-d14bb701a95e9183f9c261d9f30ab6a9.ctex"]
+source_file="res://sprites/laugh_face.png"
+dest_files=["res://.godot/imported/laugh_face.png-9092d42e0e71a15212ea1b2b9f645628.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccrgyhm8lnuf7"
-path="res://.godot/imported/laugh_face_purple.png-398c502bdc006da107a740558d30e3ba.ctex"
+uid="uid://cy843ccv11608"
+path="res://.godot/imported/sheep_prototype.png-daa315ef27af9a76800c1631d0900f58.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://laugh_face_purple.png"
-dest_files=["res://.godot/imported/laugh_face_purple.png-398c502bdc006da107a740558d30e3ba.ctex"]
+source_file="res://sprites/sheep_prototype.png"
+dest_files=["res://.godot/imported/sheep_prototype.png-daa315ef27af9a76800c1631d0900f58.ctex"]
 
 [params]
 
