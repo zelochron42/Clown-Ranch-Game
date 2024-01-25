@@ -383,7 +383,7 @@ sources/0 = SubResource("TileSetAtlasSource_4kkab")
 
 [node name="Player" type="Sprite2D" parent="."]
 top_level = true
-position = Vector2(0, 88)
+position = Vector2(-2, 92)
 texture = ExtResource("1_12xs2")
 script = ExtResource("2_so2lg")
 laugh_square_range = 2

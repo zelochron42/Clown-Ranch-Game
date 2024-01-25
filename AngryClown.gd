@@ -27,6 +27,8 @@ func _mad_behavior():
 	var direction = directions[randi() % 2]
 	tilemap_object.MoveDirection(direction)
 	pass
+
+func _nearest_animal():
 	
 func _laugh_behavior():
 	if tilemap_object.cell_position != entry_position:
