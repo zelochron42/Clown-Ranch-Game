@@ -12,7 +12,7 @@ func _ready(): #equivalent to Unity's Start() method, runs once at the start
 	cell_position = map.local_to_map(parent.position)
 	goal_cell = cell_position
 	_sync_parent()
-	map.objects.append(parent)
+	map.objects.append(parent) #adds parent to the list of moving objects tracked by GameMap.gd
 
 func MoveToCell(new_cell : Vector2i, ignore_objects : bool = false, override_movement : bool = false) -> Node:
 	#This function will attempt to tween this object to a specified cell
