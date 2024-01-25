@@ -31,9 +31,11 @@ fill_mode = 3
 texture_under = ExtResource("4_0d5ii")
 texture_progress = ExtResource("5_e4y28")
 script = ExtResource("6_vgvxx")
+drain_rate = 0.5
 
 [node name="Timer" type="Timer" parent="LaughMeter"]
 process_callback = 0
+wait_time = 0.75
 autostart = true
 
 [node name="Pathfinder" type="Node" parent="."]

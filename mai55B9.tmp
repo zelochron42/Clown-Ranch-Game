@@ -386,7 +386,6 @@ top_level = true
 position = Vector2(0, 88)
 texture = ExtResource("1_12xs2")
 script = ExtResource("2_so2lg")
-laugh_square_range = 2
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(3.375, 3.375)

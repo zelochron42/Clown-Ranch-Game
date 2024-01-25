@@ -12,7 +12,7 @@ func _ready():
 	pathfinding = $Pathfinder
 
 func _process(delta):
-	if laughter.laugh_value >= laughter.max_value / 2.0:
+	if laughter.laugh_value > 0:
 		_laughing_behavior()
 	else:
 		_bored_behavior()

@@ -43,11 +43,9 @@ func _check_cell_for_tile(check_cell) -> bool: #simple function that checks the 
 	return map.get_cell_tile_data(0, check_cell) != null
 
 func _check_cell_for_object(check_cell) -> Node: #function that checks for any moving objects on a specific tile
-	for ob in map.objects: #iterate through the list of objects defined in the tilemap script
-		if ob != parent: #ignore self
-			var mapob = ob.find_child("TilemapObject")
-			if mapob && (mapob.cell_position == check_cell || mapob.goal_cell == check_cell): #check the current and future position of the object
-				return ob
+	var ob = map.ObjectFromCell(check_cell)
+	if ob != parent: #ignore self
+		return ob
 	return null
 
 func MoveDirection(direction : Vector2i) -> Node: #Simple function that just runs MoveToCell to an adjacent cell
