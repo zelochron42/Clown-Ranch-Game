@@ -6,7 +6,7 @@ extends Node
 @export var move_time : float = 0.2 #time in seconds it takes to move from one tile to another
 var parent : Node2D
 var is_tweening : bool = false
-signal loaded
+signal movedirection(direction : int)
 
 func _ready(): #equivalent to Unity's Start() method, runs once at the start
 	map = get_tree().current_scene.find_child("TileMap")
@@ -15,7 +15,6 @@ func _ready(): #equivalent to Unity's Start() method, runs once at the start
 	goal_cell = cell_position
 	_sync_parent()
 	map.objects.append(parent) #adds parent to the list of moving objects tracked by GameMap.gd
-	loaded.emit() #signal that this node is ready to be used
 
 func SetCell(new_cell):
 	cell_position = new_cell
@@ -35,6 +34,7 @@ func MoveToCell(new_cell : Vector2i, ignore_objects : bool = false, override_mov
 		return obstruction #Fails to move and returns the object that blocked it
 
 	if !is_tweening || override_movement: #The object cannot start a new tween if it is already tweening
+		_check_direction(new_cell - cell_position) #extra function for sprite management
 		is_tweening = true
 		var tween = create_tween() #create the tween animation that will move this object
 		tween.tween_property(parent, "position", map.map_to_local(new_cell), move_time)
@@ -61,6 +61,17 @@ func MoveDirection(direction : Vector2i) -> Node: #Simple function that just run
 
 func _sync_parent(): #Snap the physical position of this object to its exact cell position
 	parent.position = map.map_to_local(cell_position)
+	
+func _check_direction(direction : Vector2i):
+	match direction:
+		Vector2i.DOWN:
+			movedirection.emit(0)
+		Vector2i.LEFT:
+			movedirection.emit(1)
+		Vector2i.UP:
+			movedirection.emit(2)
+		Vector2i.RIGHT:
+			movedirection.emit(3)
 	
 func Remove():
 	map.objects.erase(parent)

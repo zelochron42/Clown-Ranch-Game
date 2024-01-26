@@ -8,6 +8,9 @@ var timer : Timer
 
 func _ready():
 	timer = $ClownReset
+	await get_tree().create_timer(0.1).timeout
+	for i in range(sheep_count):
+		SpawnSheep()
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_select"):

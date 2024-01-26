@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://co6juaxukx7yl"]
+[gd_scene load_steps=13 format=3 uid="uid://co6juaxukx7yl"]
 
 [ext_resource type="Script" path="res://GameMap.gd" id="1_0bujn"]
-[ext_resource type="Texture2D" uid="uid://ci3y46116en3f" path="res://sprites/redcube.png" id="1_hu2dc"]
 [ext_resource type="Script" path="res://Player.gd" id="2_su2wl"]
 [ext_resource type="Script" path="res://TilemapObject.gd" id="3_orwgm"]
 [ext_resource type="Texture2D" uid="uid://ccv6go4oo7uxk" path="res://sprites/d01.png" id="4_331fw"]
+[ext_resource type="Texture2D" uid="uid://b5pxyoxhdur25" path="res://sprites/sadclown_sheet.png" id="7_rsnem"]
+[ext_resource type="Script" path="res://SadClown.gd" id="8_ve33r"]
+[ext_resource type="Script" path="res://Pathfinder.gd" id="9_06dwl"]
+[ext_resource type="Script" path="res://CreatureSprite.gd" id="9_fbs82"]
 [ext_resource type="Script" path="res://EntitySpawner.gd" id="12_nt56t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4kkab"]
@@ -379,18 +382,23 @@ custom_data_layer_0/name = "Solid"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_4kkab")
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v6jbl"]
+load_path = "res://.godot/imported/sadclown_sheet.png-37e7bf8b72d8485d28960475b6e7b84f.ctex"
+
 [node name="pathfinding_experimentation" type="Node2D"]
 
 [node name="Player" type="Sprite2D" parent="."]
 top_level = true
-position = Vector2(205, 115)
-texture = ExtResource("1_hu2dc")
+position = Vector2(120, 120)
+texture = ExtResource("7_rsnem")
+region_enabled = true
+region_rect = Rect2(0, 0, 14, 15)
 script = ExtResource("2_su2wl")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(83, -20)
 zoom = Vector2(3.375, 3.375)
-limit_left = 0
+limit_left = -256
 limit_top = 0
 limit_right = 256
 limit_bottom = 192
@@ -402,6 +410,12 @@ position_smoothing_speed = 0.5
 script = ExtResource("3_orwgm")
 map = NodePath("../../TileMap")
 
+[node name="CreatureSprite" type="Node" parent="Player"]
+script = ExtResource("9_fbs82")
+animate_speed = 5.0
+sprite_size = Vector2i(14, 15)
+sprite_cells = Vector2i(4, 3)
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_64ugr")
 format = 2
@@ -411,3 +425,48 @@ script = ExtResource("1_0bujn")
 [node name="EntitySpawner" type="Node" parent="."]
 script = ExtResource("12_nt56t")
 sheep_zone = Rect2i(5, 3, 5, 3)
+
+[node name="SadClown" type="Sprite2D" parent="."]
+position = Vector2(22, 24)
+texture = SubResource("CompressedTexture2D_v6jbl")
+region_enabled = true
+region_rect = Rect2(0, 0, 14, 15)
+script = ExtResource("8_ve33r")
+talk_position = Vector2i(3, 7)
+text_speed = 0.04
+
+[node name="TilemapObject" type="Node" parent="SadClown" node_paths=PackedStringArray("map")]
+script = ExtResource("3_orwgm")
+map = NodePath("../../TileMap")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SadClown"]
+z_index = 10
+offset_left = -8.0
+offset_top = -26.0
+offset_right = 341.0
+offset_bottom = 20.0
+scale = Vector2(0.377024, 0.377024)
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.337255)
+theme_override_colors/font_outline_color = Color(0.00392157, 0.129412, 0.772549, 1)
+theme_override_constants/shadow_outline_size = 15
+theme_override_constants/outline_size = 5
+text = "The quick brown fox
+jumps over the lazy dog"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+text_direction = 1
+
+[node name="CreatureSprite" type="Node" parent="SadClown"]
+script = ExtResource("9_fbs82")
+animate_speed = 5.0
+sprite_size = Vector2i(14, 15)
+sprite_cells = Vector2i(4, 3)
+
+[node name="JokeCooldown" type="Timer" parent="SadClown"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Pathfinder" type="Node" parent="SadClown"]
+script = ExtResource("9_06dwl")
