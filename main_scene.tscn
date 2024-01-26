@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1s4kykt7sebs"]
+[gd_scene load_steps=10 format=3 uid="uid://c1s4kykt7sebs"]
 
 [ext_resource type="Texture2D" uid="uid://ci3y46116en3f" path="res://sprites/redcube.png" id="1_12xs2"]
 [ext_resource type="Script" path="res://TilemapObject.gd" id="2_avyxl"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ccv6go4oo7uxk" path="res://sprites/d01.png" id="5_gfouj"]
 [ext_resource type="Script" path="res://GameMap.gd" id="5_k8yc6"]
 [ext_resource type="Script" path="res://EntitySpawner.gd" id="6_s48w7"]
+[ext_resource type="PackedScene" uid="uid://cm251cojinvmq" path="res://angry_clown.tscn" id="7_rqqru"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4kkab"]
 texture = ExtResource("5_gfouj")
@@ -410,4 +411,12 @@ script = ExtResource("5_k8yc6")
 
 [node name="EntitySpawner" type="Node" parent="."]
 script = ExtResource("6_s48w7")
+sheep_count = 25
 sheep_zone = Rect2i(2, 2, 10, 7)
+
+[node name="ClownReset" type="Timer" parent="EntitySpawner"]
+wait_time = 15.0
+one_shot = true
+
+[node name="AngryClown" parent="." instance=ExtResource("7_rqqru")]
+position = Vector2(-64, 128)

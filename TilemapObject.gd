@@ -17,6 +17,11 @@ func _ready(): #equivalent to Unity's Start() method, runs once at the start
 	map.objects.append(parent) #adds parent to the list of moving objects tracked by GameMap.gd
 	loaded.emit() #signal that this node is ready to be used
 
+func SetCell(new_cell):
+	cell_position = new_cell
+	goal_cell = cell_position
+	_sync_parent()
+
 func MoveToCell(new_cell : Vector2i, ignore_objects : bool = false, override_movement : bool = false) -> Node:
 	#This function will attempt to tween this object to a specified cell
 	#If it fails due to being blocked by an object, it will return the node of the object that blocked it
@@ -34,10 +39,12 @@ func MoveToCell(new_cell : Vector2i, ignore_objects : bool = false, override_mov
 		var tween = create_tween() #create the tween animation that will move this object
 		tween.tween_property(parent, "position", map.map_to_local(new_cell), move_time)
 		goal_cell = new_cell
-		await tween.finished #Wait in real-time for the tween to end
-		cell_position = goal_cell
-		is_tweening = false
+		_end_tween(tween)
 	return null #Returns null after moving successfully, since nothing blocked it
+func _end_tween(tween):
+	await tween.finished #Wait in real-time for the tween to end
+	cell_position = goal_cell
+	is_tweening = false
 
 func _check_cell_for_tile(check_cell) -> bool: #simple function that checks the tilemap to see if a tile is empty
 	return map.get_cell_tile_data(0, check_cell) != null

@@ -1,17 +1,31 @@
 extends Node
 
+@export var sheep_count : int
 var sheep = preload("res://sheep.tscn")
+var clown = preload("res://angry_clown.tscn")
+var timer : Timer
 @export var sheep_zone : Rect2i
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	timer = $ClownReset
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("ui_select"):
 		SpawnSheep()
+		
+func ClownReturn():
+	timer.start()
+	await timer.timeout
+	_spawn_clown()
+	
+func _spawn_clown():
+	var start_pos = Vector2i(-1, 0)
+	var new_clown = clown.instantiate()
+	new_clown.entry_position = start_pos
+	var tmo = new_clown.find_child("TilemapObject")
+	get_tree().current_scene.add_child(new_clown)
+	tmo.SetCell(start_pos)
+	
 
 func SpawnSheep():
 	var random_x : int = randi_range(sheep_zone.position.x, sheep_zone.end.x)
@@ -21,5 +35,5 @@ func SpawnSheep():
 	var new_sheep = sheep.instantiate()
 	var tmo = new_sheep.find_child("TilemapObject")
 	get_tree().current_scene.add_child(new_sheep)
-	tmo.MoveToCell(new_tile)
+	tmo.SetCell(new_tile)
 	
