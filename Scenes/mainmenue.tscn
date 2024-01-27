@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://deo03wdsx4s5e"]
+
+[ext_resource type="Script" path="res://menue code/start.gd" id="1_8bqka"]
+[ext_resource type="Script" path="res://menue code/controls.gd" id="2_ucmop"]
+[ext_resource type="Script" path="res://menue code/levels.gd" id="3_0pghn"]
+[ext_resource type="Script" path="res://menue code/quit.gd" id="4_uvpla"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 203.0
+offset_top = 334.0
+offset_right = 243.0
+offset_bottom = 374.0
+scale = Vector2(1, 1.00922)
+text = "Start"
+script = ExtResource("1_8bqka")
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 391.0
+offset_right = 245.0
+offset_bottom = 431.0
+text = "Levels"
+script = ExtResource("3_0pghn")
+
+[node name="Button3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 203.0
+offset_top = 460.0
+offset_right = 243.0
+offset_bottom = 500.0
+text = "Help"
+script = ExtResource("2_ucmop")
+
+[node name="Button4" type="Button" parent="."]
+layout_mode = 0
+offset_left = 963.0
+offset_top = 455.0
+offset_right = 1004.0
+offset_bottom = 496.0
+text = "Quit"
+script = ExtResource("4_uvpla")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="pressed" from="Button2" to="Button2" method="_on_pressed"]
+[connection signal="pressed" from="Button3" to="Button3" method="_on_pressed"]
+[connection signal="pressed" from="Button4" to="Button4" method="_on_pressed"]
