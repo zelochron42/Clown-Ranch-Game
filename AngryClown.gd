@@ -44,7 +44,7 @@ func _nearest_animal() -> Vector2i:
 	var min_dist : float = 20
 	for ob in map.objects:
 		var laugh = ob.find_child("LaughMeter")
-		if ob != self && laugh && laugh.value > 0:
+		if ob != self && laugh && laugh.value > 0 && laugh.laugh_sources.has("unspecified"):
 			var ob_pos = ob.find_child("TilemapObject").cell_position
 			var dist : float = (ob_pos - tilemap_object.cell_position).length()
 			if dist < min_dist:
@@ -55,9 +55,9 @@ func _nearest_animal() -> Vector2i:
 func _laugh_behavior():
 	if tilemap_object.cell_position != entry_position:
 		var path = pathfinding.FindPath(tilemap_object.cell_position, entry_position)
-		tilemap_object.MoveToCell(path[1])
+		tilemap_object.MoveToCell(path[1], true)
 	else:
-		spawner.ClownReturn()
+		spawner.ThreatReturn(name)
 		tilemap_object.Remove()
 		
 

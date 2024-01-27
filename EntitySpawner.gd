@@ -2,12 +2,16 @@ extends Node
 
 @export var sheep_count : int
 var sheep = preload("res://sheep.tscn")
-var clown = preload("res://angry_clown.tscn")
-var timer : Timer
+var threats = [
+	preload("res://angry_clown.tscn"),
+	preload("res://sad_clown.tscn")
+]
+var respawn_timers : Array[Timer]
 @export var sheep_zone : Rect2i
+@export var threat : int = 0
 
 func _ready():
-	timer = $ClownReset
+	respawn_timers = [$MadReset, $SadReset]
 	await get_tree().create_timer(0.1).timeout
 	for i in range(sheep_count):
 		SpawnSheep()
@@ -16,17 +20,21 @@ func _process(delta):
 	if Input.is_action_just_pressed("ui_select"):
 		SpawnSheep()
 		
-func ClownReturn():
-	timer.start()
-	await timer.timeout
-	_spawn_clown()
-	
-func _spawn_clown():
+func ThreatReturn(threat_name : String):
+	match threat_name:
+		"AngryClown":
+			_timed_respawn(0)
+		"SadClown":
+			_timed_respawn(1)
+
+func _timed_respawn(id : int):
+	respawn_timers[id].start()
+	await respawn_timers[id].timeout
 	var start_pos = Vector2i(-1, 0)
-	var new_clown = clown.instantiate()
-	new_clown.entry_position = start_pos
-	var tmo = new_clown.find_child("TilemapObject")
-	get_tree().current_scene.add_child(new_clown)
+	var new_threat = threats[id].instantiate()
+	new_threat.entry_position = start_pos
+	var tmo = new_threat.find_child("TilemapObject")
+	get_tree().current_scene.add_child(new_threat)
 	tmo.SetCell(start_pos)
 	
 

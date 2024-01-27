@@ -30,7 +30,7 @@ func MoveToCell(new_cell : Vector2i, ignore_objects : bool = false, override_mov
 		return null #Fails to move if there is no tile to move to
 
 	var obstruction : Node = _check_cell_for_object(new_cell) #Check for other objects blocking the tile
-	if obstruction:
+	if obstruction && !ignore_objects:
 		return obstruction #Fails to move and returns the object that blocked it
 
 	if !is_tweening || override_movement: #The object cannot start a new tween if it is already tweening

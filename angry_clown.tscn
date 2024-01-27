@@ -12,7 +12,7 @@
 position = Vector2(73, 86)
 texture = ExtResource("1_r4vob")
 script = ExtResource("2_l7ibg")
-happiness_threshold = 75.0
+happiness_threshold = 90.0
 
 [node name="TilemapObject" type="Node" parent="."]
 script = ExtResource("3_46vin")
@@ -29,14 +29,14 @@ offset_right = 8.0
 offset_bottom = -10.0
 max_value = 16.0
 step = 0.1
-value = 7.0
 fill_mode = 3
 texture_under = ExtResource("5_8dp05")
 texture_progress = ExtResource("6_f5ttl")
 script = ExtResource("7_vehc5")
-drain_rate = 0.5
+laugh_sources = Array[String](["tickle"])
+drain_rate = 0.25
 
 [node name="Timer" type="Timer" parent="LaughMeter"]
 process_callback = 0
-wait_time = 0.75
+wait_time = 2.0
 autostart = true

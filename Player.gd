@@ -23,13 +23,13 @@ func _process(delta):
 func TryMove(direction):
 	var target = await tilemap_object.MoveDirection(direction)
 	if target != null:
-		MakeLaugh(target, tickle_force)
+		MakeLaugh(target, tickle_force, "tickle")
 
-func MakeLaugh(target, value : float = laugh_force):
+func MakeLaugh(target, value : float = laugh_force, type : String = "unspecified"):
 	print("attempting to make target laugh")
 	var meter = target.find_child("LaughMeter")
 	if meter:
-		meter.AddLaugh(value)
+		meter.AddLaugh(value, type)
 		
 func _perform_action(): #function for determining which action happens when the player presses the button
 	_laugh_action() #currently only has one action, will add more later
@@ -42,4 +42,4 @@ func _laugh_action():
 			var check_y = tilemap_object.cell_position.y + y
 			var check_obj = tilemap_object.map.ObjectFromCell(Vector2i(check_x, check_y))
 			if (check_obj != null):
-				MakeLaugh(check_obj, laugh_force)
+				MakeLaugh(check_obj, laugh_force, "laugh")

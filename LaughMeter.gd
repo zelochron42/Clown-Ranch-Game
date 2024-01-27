@@ -1,5 +1,6 @@
 extends TextureProgressBar
 
+@export var laugh_sources : Array[String] = ["unspecified"]
 @export var drain_rate : float = 1
 var timer : Timer
 var laugh_value : float
@@ -18,5 +19,6 @@ func _process(delta):
 func _laugh_drain():
 	AddLaugh(-drain_rate)
 
-func AddLaugh(laughs):
-	laugh_value = clamp(laugh_value + laughs, min_value, max_value)
+func AddLaugh(laughs, laugh_source : String = "unspecified"):
+	if laugh_sources.has(laugh_source):
+		laugh_value = clamp(laugh_value + laughs, min_value, max_value)
