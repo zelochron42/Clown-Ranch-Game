@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c1s4kykt7sebs"]
+[gd_scene load_steps=39 format=3 uid="uid://c1s4kykt7sebs"]
 
 [ext_resource type="Texture2D" uid="uid://dlfd7l0rtrtgd" path="res://sprites/mainclown_sheet.png" id="1_b4sce"]
 [ext_resource type="Texture2D" uid="uid://cru6d25lgjfqw" path="res://sprites/laugh_face.png" id="1_ppuft"]
@@ -10,15 +10,56 @@
 [ext_resource type="Texture2D" uid="uid://3hmmim3p737o" path="res://sprites/groundtiles.png" id="5_c1cc2"]
 [ext_resource type="Script" path="res://GameMap.gd" id="5_ral8r"]
 [ext_resource type="Script" path="res://EntitySpawner.gd" id="6_0qoav"]
-[ext_resource type="PackedScene" uid="uid://cm251cojinvmq" path="res://angry_clown.tscn" id="7_p8803"]
-[ext_resource type="PackedScene" path="res://sad_clown.tscn" id="8_3fobc"]
+[ext_resource type="Texture2D" uid="uid://dwll8levoh8jp" path="res://sprites/haha.png" id="9_nq0gj"]
 [ext_resource type="Texture2D" uid="uid://bls4n3dilt06h" path="res://sprites/carrt.png" id="10_usqra"]
-[ext_resource type="Texture2D" uid="uid://firluthle7hq" path="res://sprites/boxes.png" id="11_b6ci5"]
-[ext_resource type="Script" path="res://ItemBox.gd" id="12_t07k1"]
-[ext_resource type="Texture2D" uid="uid://bhwno304mxnvs" path="res://sprites/irs_sheet.png" id="15_4lepr"]
-[ext_resource type="Script" path="res://Scenes/IRS_behavior.gd" id="16_obsuq"]
-[ext_resource type="Script" path="res://Pathfinder.gd" id="17_y8k7x"]
+[ext_resource type="Texture2D" uid="uid://do7iw20xv4dcu" path="res://sprites/fence.png" id="13_ir3d7"]
+[ext_resource type="Texture2D" uid="uid://divv27ha1wuc7" path="res://sprites/gate.png" id="14_p4ocm"]
 [ext_resource type="Script" path="res://CreatureSprite.gd" id="18_empag"]
+[ext_resource type="Texture2D" uid="uid://cu5hn87vf64uv" path="res://sprites/irs_intro_2.png" id="19_8h313"]
+[ext_resource type="AudioStream" uid="uid://b8pkpcwb4ye5t" path="res://audio/Loop_Clown_Country.mp3" id="19_f301n"]
+[ext_resource type="Texture2D" uid="uid://cetx5y68xa8pl" path="res://sprites/pie.png" id="19_ica1i"]
+[ext_resource type="Script" path="res://Scenes/BackgroundMusic.gd" id="20_ef1ip"]
+[ext_resource type="AudioStream" uid="uid://b0wks2jobybse" path="res://audio/Intro_Clown_Country.mp3" id="21_b1l8p"]
+[ext_resource type="AudioStream" uid="uid://df0e74pfqtvbf" path="res://audio/intro_clown_boss.mp3" id="22_gvr4s"]
+[ext_resource type="Script" path="res://UITimer.gd" id="22_jrrcc"]
+[ext_resource type="AudioStream" uid="uid://crp7gdx5a0165" path="res://audio/irs_intro_screen.mp3" id="23_jcfyw"]
+[ext_resource type="FontFile" uid="uid://cuupyhjlg4c34" path="res://bubblkrd (1).ttf" id="23_s5jwl"]
+[ext_resource type="AudioStream" uid="uid://dodyda3mp6y6s" path="res://audio/loop_clown_boss.mp3" id="23_yh78q"]
+[ext_resource type="AudioStream" uid="uid://6dyksig12whb" path="res://audio/clown_title.mp3" id="25_bpubx"]
+[ext_resource type="Texture2D" uid="uid://bq1ie53628ts7" path="res://sprites/irs_intro_1.png" id="26_jqfwi"]
+
+[sub_resource type="Animation" id="Animation_kj7re"]
+resource_name = "haha_grow"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_enbfg"]
+_data = {
+"haha_grow": SubResource("Animation_kj7re")
+}
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4kkab"]
 texture = ExtResource("4_pdtut")
@@ -428,19 +469,78 @@ custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_4kkab")
 sources/1 = SubResource("TileSetAtlasSource_5a6hl")
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ovt16"]
+texture = ExtResource("13_ir3d7")
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rlast"]
+texture = ExtResource("14_p4ocm")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_k0nma"]
+sources/0 = SubResource("TileSetAtlasSource_ovt16")
+sources/1 = SubResource("TileSetAtlasSource_rlast")
+
+[sub_resource type="Theme" id="Theme_pdae8"]
+
+[sub_resource type="Animation" id="Animation_clstu"]
+resource_name = "IRS"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1000), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("26_jqfwi"), ExtResource("19_8h313")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y0ed5"]
+_data = {
+"IRS": SubResource("Animation_clstu")
+}
+
 [node name="MainScene" type="Node2D"]
 y_sort_enabled = true
 
 [node name="Player" type="Sprite2D" parent="."]
 y_sort_enabled = true
-position = Vector2(267, 92)
+position = Vector2(92, 125)
 texture = ExtResource("1_b4sce")
 region_enabled = true
 region_rect = Rect2(0, 0, 22, 20)
 script = ExtResource("2_k5ot5")
 laugh_square_range = 2
 item_quantity = 5
-item_textures = Array[Texture2D]([ExtResource("1_ppuft"), ExtResource("3_6ak6d"), ExtResource("4_nktr4"), ExtResource("4_nktr4"), ExtResource("4_nktr4")])
+item_textures = Array[Texture2D]([ExtResource("1_ppuft"), ExtResource("3_6ak6d"), ExtResource("4_nktr4"), ExtResource("4_nktr4"), ExtResource("19_ica1i")])
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(3.375, 3.375)
@@ -462,39 +562,53 @@ animate_speed = 6.0
 sprite_size = Vector2i(22, 20)
 sprite_cells = Vector2i(4, 3)
 
+[node name="Haha" type="Sprite2D" parent="Player"]
+visible = false
+z_index = 8
+position = Vector2(0, -11)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("9_nq0gj")
+
+[node name="LaughAnimation" type="AnimationPlayer" parent="Player"]
+root_node = NodePath("../Haha")
+libraries = {
+"": SubResource("AnimationLibrary_enbfg")
+}
+
 [node name="TileMap" type="TileMap" parent="."]
+z_index = -1
 y_sort_enabled = true
 tile_set = SubResource("TileSet_yrj0a")
 format = 2
 layer_0/tile_data = PackedInt32Array(0, 1, 1, 65536, 1, 2, 131072, 1, 0, 196608, 1, 2, 262144, 1, 1, 327680, 1, 0, 393216, 1, 1, 458752, 1, 2, 524288, 65537, 0, 589824, 65537, 1, 655360, 65537, 1, 720896, 65537, 2, 1, 1, 1, 65537, 1, 0, 131073, 1, 0, 196609, 1, 1, 262145, 1, 2, 327681, 1, 2, 393217, 1, 1, 458753, 1, 0, 524289, 131073, 0, 589825, 131073, 1, 655361, 131073, 1, 720897, 131073, 2, 2, 1, 2, 65538, 1, 1, 131074, 1, 0, 196610, 1, 2, 262146, 1, 2, 327682, 1, 2, 393218, 1, 2, 458754, 1, 0, 524290, 131073, 0, 589826, 131073, 1, 655362, 131073, 1, 720898, 131073, 2, 3, 1, 1, 65539, 1, 2, 131075, 1, 1, 196611, 1, 0, 262147, 1, 2, 327683, 1, 2, 393219, 1, 1, 458755, 1, 2, 524291, 131073, 0, 589827, 131073, 1, 655363, 131073, 1, 720899, 131073, 2, 4, 1, 2, 65540, 1, 2, 131076, 1, 1, 196612, 1, 1, 262148, 1, 1, 327684, 1, 2, 393220, 1, 0, 458756, 1, 2, 524292, 131073, 0, 589828, 131073, 1, 655364, 131073, 1, 720900, 131073, 2, 5, 1, 0, 65541, 1, 1, 131077, 1, 0, 196613, 1, 1, 262149, 1, 0, 327685, 1, 0, 393221, 1, 2, 458757, 1, 0, 524293, 131073, 0, 589829, 131073, 1, 655365, 131073, 1, 720901, 131073, 2, 6, 1, 1, 65542, 1, 1, 131078, 1, 1, 196614, 1, 2, 262150, 1, 0, 327686, 1, 0, 393222, 1, 0, 458758, 1, 1, 524294, 131073, 0, 589830, 131073, 1, 655366, 131073, 1, 720902, 131073, 2, 7, 1, 0, 65543, 1, 1, 131079, 1, 1, 196615, 1, 1, 262151, 1, 0, 327687, 1, 0, 393223, 1, 2, 458759, 1, 2, 524295, 131073, 0, 589831, 131073, 1, 655367, 131073, 1, 720903, 131073, 2, 8, 1, 0, 65544, 1, 0, 131080, 1, 0, 196616, 1, 1, 262152, 1, 2, 327688, 1, 0, 393224, 1, 0, 458760, 1, 1, 524296, 196609, 0, 589832, 196609, 1, 655368, 196609, 1, 720904, 196609, 2, 9, 1, 0, 65545, 1, 2, 131081, 65537, 0, 196617, 65537, 1, 262153, 65537, 2, 327689, 1, 0, 393225, 1, 2, 458761, 1, 1, 524297, 1, 2, 589833, 1, 1, 655369, 1, 0, 720905, 1, 1, 10, 1, 2, 65546, 65537, 0, 131082, 327681, 1, 196618, 131073, 1, 262154, 131073, 2, 327690, 1, 0, 393226, 1, 1, 458762, 1, 0, 524298, 1, 1, 589834, 1, 2, 655370, 1, 1, 720906, 1, 1, 11, 1, 1, 65547, 131073, 0, 131083, 131073, 1, 196619, 131073, 1, 262155, 131073, 2, 327691, 1, 2, 393227, 1, 0, 458763, 1, 0, 524299, 1, 0, 589835, 1, 2, 655371, 1, 1, 720907, 1, 0, 12, 1, 1, 65548, 131073, 0, 131084, 131073, 1, 196620, 131073, 1, 262156, 131073, 2, 327692, 1, 1, 393228, 1, 0, 458764, 1, 1, 524300, 1, 0, 589836, 1, 2, 655372, 1, 2, 720908, 1, 2, 13, 1, 0, 65549, 131073, 0, 131085, 131073, 1, 196621, 262145, 0, 262157, 196609, 2, 327693, 1, 0, 393229, 1, 2, 458765, 1, 0, 524301, 1, 1, 589837, 1, 0, 655373, 1, 1, 720909, 1, 1, 14, 1, 2, 65550, 196609, 0, 131086, 196609, 1, 196622, 196609, 2, 262158, 1, 1, 327694, 65537, 0, 393230, 65537, 1, 458766, 65537, 1, 524302, 65537, 1, 589838, 65537, 2, 655374, 1, 2, 720910, 1, 2, 15, 1, 2, 65551, 1, 1, 131087, 1, 0, 196623, 1, 0, 262159, 1, 0, 327695, 131073, 0, 393231, 131073, 1, 458767, 131073, 1, 524303, 131073, 1, 589839, 131073, 2, 655375, 1, 1, 720911, 1, 1, 16, 1, 2, 65552, 1, 0, 131088, 1, 0, 196624, 1, 0, 262160, 65537, 0, 327696, 327681, 1, 393232, 131073, 1, 458768, 131073, 1, 524304, 131073, 1, 589840, 131073, 2, 655376, 1, 2, 720912, 1, 0, 17, 1, 0, 65553, 1, 1, 131089, 1, 1, 196625, 1, 2, 262161, 131073, 0, 327697, 131073, 1, 393233, 131073, 1, 458769, 131073, 1, 524305, 131073, 1, 589841, 131073, 2, 655377, 1, 1, 720913, 1, 2, 18, 1, 1, 65554, 1, 0, 131090, 1, 1, 196626, 1, 2, 262162, 131073, 0, 327698, 131073, 1, 393234, 131073, 1, 458770, 131073, 1, 524306, 262145, 0, 589842, 196609, 2, 655378, 1, 2, 720914, 1, 2, 19, 1, 0, 65555, 1, 1, 131091, 1, 2, 196627, 1, 1, 262163, 131073, 0, 327699, 131073, 1, 393235, 131073, 1, 458771, 131073, 1, 524307, 131073, 2, 589843, 1, 1, 655379, 1, 2, 720915, 1, 1, 20, 1, 2, 65556, 1, 1, 131092, 1, 0, 196628, 65537, 0, 262164, 327681, 1, 327700, 131073, 1, 393236, 131073, 1, 458772, 131073, 1, 524308, 131073, 2, 589844, 1, 1, 655380, 1, 2, 720916, 1, 1, 21, 1, 1, 65557, 1, 0, 131093, 65537, 0, 196629, 327681, 1, 262165, 131073, 1, 327701, 131073, 1, 393237, 131073, 1, 458773, 131073, 1, 524309, 131073, 2, 589845, 1, 0, 655381, 1, 2, 720917, 1, 2, 22, 1, 2, 65558, 1, 0, 131094, 131073, 0, 196630, 131073, 1, 262166, 131073, 1, 327702, 131073, 1, 393238, 131073, 1, 458774, 131073, 1, 524310, 131073, 2, 589846, 1, 2, 655382, 1, 1, 720918, 1, 2, 23, 1, 2, 65559, 1, 2, 131095, 131073, 0, 196631, 131073, 1, 262167, 131073, 1, 327703, 131073, 1, 393239, 131073, 1, 458775, 262145, 0, 524311, 196609, 2, 589847, 1, 0, 655383, 1, 2, 720919, 1, 0, 24, 1, 0, 65560, 1, 2, 131096, 196609, 0, 196632, 262145, 1, 262168, 131073, 1, 327704, 131073, 1, 393240, 131073, 1, 458776, 131073, 2, 524312, 1, 2, 589848, 1, 2, 655384, 1, 0, 720920, 1, 1, 25, 1, 1, 65561, 1, 2, 131097, 1, 1, 196633, 196609, 0, 262169, 196609, 1, 327705, 196609, 1, 393241, 196609, 1, 458777, 196609, 2, 524313, 1, 1, 589849, 1, 2, 655385, 1, 2, 720921, 1, 0, 26, 1, 2, 65562, 1, 0, 131098, 1, 2, 196634, 1, 2, 262170, 1, 1, 327706, 1, 0, 393242, 1, 2, 458778, 1, 1, 524314, 65537, 0, 589850, 65537, 1, 655386, 65537, 2, 720922, 1, 1, 27, 1, 0, 65563, 1, 1, 131099, 1, 2, 196635, 65537, 0, 262171, 65537, 2, 327707, 1, 1, 393243, 65537, 0, 458779, 65537, 1, 524315, 327681, 1, 589851, 131073, 1, 655387, 131073, 2, 720923, 1, 1, 28, 1, 2, 65564, 1, 1, 131100, 65537, 0, 196636, 327681, 1, 262172, 131073, 2, 327708, 1, 0, 393244, 131073, 0, 458780, 131073, 1, 524316, 131073, 1, 589852, 131073, 1, 655388, 131073, 2, 720924, 1, 2, 29, 65537, 0, 65565, 65537, 2, 131101, 196609, 0, 196637, 262145, 1, 262173, 327681, 0, 327709, 65537, 2, 393245, 196609, 0, 458781, 262145, 1, 524317, 131073, 1, 589853, 131073, 1, 655389, 131073, 2, 720925, 1, 1, 30, 131073, 0, 65566, 327681, 0, 131102, 65537, 2, 196638, 196609, 0, 262174, 196609, 1, 327710, 196609, 2, 393246, 1, 2, 458782, 196609, 0, 524318, 196609, 1, 589854, 196609, 1, 655390, 196609, 2, 720926, 1, 1, 31, 196609, 0, 65567, 196609, 1, 131103, 196609, 2, 196639, 1, 0, 262175, 1, 1, 327711, 1, 2, 393247, 1, 0, 458783, 1, 2, 524319, 1, 0, 589855, 1, 1, 655391, 1, 1, 720927, 1, 1)
 script = ExtResource("5_ral8r")
 
-[node name="EntitySpawner" type="Node" parent="."]
+[node name="DecorativeTilemap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_k0nma")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0, 25, 0, 0, 26, 0, 0, 27, 0, 0, 28, 0, 0, 29, 0, 0, 30, 0, 0, 31, 0, 0)
+
+[node name="EntitySpawner" type="Node" parent="." node_paths=PackedStringArray("center_text", "round_timer", "counter_text", "music", "irs_anim", "irs_graphic")]
 script = ExtResource("6_0qoav")
-sheep_count = 25
-sheep_zone = Rect2i(16, 2, 10, 7)
+center_text = NodePath("../CanvasLayer/CenterText")
+round_timer = NodePath("../CanvasLayer/Timer")
+counter_text = NodePath("../CanvasLayer/Counter/Label")
+sheep_counts = Array[int]([6, 12, 20])
+sheep_zone = Rect2i(17, 3, 10, 5)
+music = NodePath("../BackgroundMusic")
+irs_anim = NodePath("../CanvasLayer/IRS_intro/AnimationPlayer")
+irs_graphic = NodePath("../CanvasLayer/IRS_intro")
 
 [node name="MadReset" type="Timer" parent="EntitySpawner"]
-wait_time = 18.0
+wait_time = 12.0
 one_shot = true
 
 [node name="SadReset" type="Timer" parent="EntitySpawner"]
-wait_time = 10.0
+wait_time = 11.0
 one_shot = true
 
 [node name="IRSReset" type="Timer" parent="EntitySpawner"]
 wait_time = 6.0
-one_shot = true
-
-[node name="AngryClown" parent="." instance=ExtResource("7_p8803")]
-y_sort_enabled = true
-position = Vector2(205, 128)
-entry_position = Vector2i(16, 0)
-
-[node name="SadClown" parent="." instance=ExtResource("8_3fobc")]
-y_sort_enabled = true
-position = Vector2(148, 8)
-entry_position = Vector2i(16, 0)
 
 [node name="Carrt" type="Sprite2D" parent="."]
 y_sort_enabled = true
@@ -503,91 +617,6 @@ texture = ExtResource("10_usqra")
 offset = Vector2(0, -13.3)
 region_enabled = true
 region_rect = Rect2(0, 0, 96, 57)
-
-[node name="BananaBox" type="Sprite2D" parent="."]
-position = Vector2(133, 88)
-texture = ExtResource("11_b6ci5")
-region_enabled = true
-region_rect = Rect2(1, 1, 15, 15)
-script = ExtResource("12_t07k1")
-item = "banana"
-quantity = 1
-
-[node name="TilemapObject" type="Node" parent="BananaBox" node_paths=PackedStringArray("map")]
-script = ExtResource("3_jc4s2")
-map = NodePath("../../TileMap")
-
-[node name="BalloonBox" type="Sprite2D" parent="."]
-position = Vector2(165, 88)
-texture = ExtResource("11_b6ci5")
-region_enabled = true
-region_rect = Rect2(17, 1, 15, 15)
-script = ExtResource("12_t07k1")
-item = "banana"
-quantity = 1
-
-[node name="TilemapObject" type="Node" parent="BalloonBox" node_paths=PackedStringArray("map")]
-script = ExtResource("3_jc4s2")
-map = NodePath("../../TileMap")
-
-[node name="RakeBox" type="Sprite2D" parent="."]
-position = Vector2(149, 88)
-texture = ExtResource("11_b6ci5")
-region_enabled = true
-region_rect = Rect2(17, 17, 15, 15)
-script = ExtResource("12_t07k1")
-item = "banana"
-quantity = 1
-
-[node name="TilemapObject" type="Node" parent="RakeBox" node_paths=PackedStringArray("map")]
-script = ExtResource("3_jc4s2")
-map = NodePath("../../TileMap")
-
-[node name="PieBox" type="Sprite2D" parent="."]
-position = Vector2(181, 88)
-texture = ExtResource("11_b6ci5")
-region_enabled = true
-region_rect = Rect2(1, 17, 15, 15)
-script = ExtResource("12_t07k1")
-item = "banana"
-quantity = 1
-
-[node name="TilemapObject" type="Node" parent="PieBox" node_paths=PackedStringArray("map")]
-script = ExtResource("3_jc4s2")
-map = NodePath("../../TileMap")
-
-[node name="IRS" type="Sprite2D" parent="."]
-position = Vector2(250, 72)
-texture = ExtResource("15_4lepr")
-offset = Vector2(0, -4.815)
-region_enabled = true
-region_rect = Rect2(0, 0, 16, 32)
-script = ExtResource("16_obsuq")
-
-[node name="TilemapObject" type="Node" parent="IRS"]
-script = ExtResource("3_jc4s2")
-move_time = 0.6
-
-[node name="Pathfinder" type="Node" parent="IRS"]
-script = ExtResource("17_y8k7x")
-
-[node name="CreatureSprite" type="Node" parent="IRS"]
-script = ExtResource("18_empag")
-animate_speed = 5.0
-sprite_size = Vector2i(16, 32)
-sprite_cells = Vector2i(4, 3)
-
-[node name="Label" type="Label" parent="IRS"]
-modulate = Color(1, 0, 0, 1)
-z_index = 10
-offset_left = -90.0
-offset_top = -30.0
-offset_right = 94.0
-offset_bottom = -7.0
-scale = Vector2(0.258913, 0.258011)
-pivot_offset = Vector2(90, 0)
-text = "IMMUNE TO LAUGHTER"
-horizontal_alignment = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 25
@@ -643,3 +672,86 @@ grow_vertical = 0
 scale = Vector2(2.5155, 2.5155)
 pivot_offset = Vector2(20, 20)
 texture = ExtResource("1_ppuft")
+
+[node name="Timer" type="Node2D" parent="CanvasLayer" node_paths=PackedStringArray("spawner")]
+script = ExtResource("22_jrrcc")
+spawner = NodePath("../../EntitySpawner")
+
+[node name="Label" type="Label" parent="CanvasLayer/Timer"]
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 308.0
+offset_bottom = 157.0
+scale = Vector2(0.418604, 0.418604)
+theme_override_colors/font_color = Color(0.94902, 0.560784, 0.560784, 1)
+theme_override_fonts/font = ExtResource("23_s5jwl")
+theme_override_font_sizes/font_size = 200
+text = "111"
+
+[node name="Timer" type="Timer" parent="CanvasLayer/Timer"]
+wait_time = 150.0
+one_shot = true
+autostart = true
+
+[node name="Counter" type="Node2D" parent="CanvasLayer"]
+position = Vector2(0, 537)
+
+[node name="Label" type="Label" parent="CanvasLayer/Counter"]
+offset_left = 8.0
+offset_top = 27.0
+offset_right = 308.0
+offset_bottom = 177.0
+scale = Vector2(0.418604, 0.418604)
+theme_override_colors/font_color = Color(0.94902, 0.560784, 0.560784, 1)
+theme_override_fonts/font = ExtResource("23_s5jwl")
+theme_override_font_sizes/font_size = 200
+text = "00
+"
+
+[node name="small_label" type="Label" parent="CanvasLayer/Counter"]
+offset_left = 8.0
+offset_top = -22.0
+offset_right = 571.0
+offset_bottom = 245.0
+scale = Vector2(0.175863, 0.175863)
+theme_override_colors/font_color = Color(0.94902, 0.560784, 0.560784, 1)
+theme_override_fonts/font = ExtResource("23_s5jwl")
+theme_override_font_sizes/font_size = 200
+text = "Score:"
+
+[node name="CenterText" type="RichTextLabel" parent="CanvasLayer"]
+offset_left = 325.0
+offset_top = 221.0
+offset_right = 725.0
+offset_bottom = 244.0
+scale = Vector2(2.33834, 2.33834)
+pivot_offset = Vector2(200, 0)
+theme = SubResource("Theme_pdae8")
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+
+[node name="IRS_intro" type="TextureRect" parent="CanvasLayer"]
+visible = false
+z_index = 501
+offset_top = 1000.0
+offset_right = 340.0
+offset_bottom = 1188.0
+scale = Vector2(3.47826, 3.47826)
+texture = ExtResource("26_jqfwi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/IRS_intro"]
+libraries = {
+"": SubResource("AnimationLibrary_y0ed5")
+}
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(240, 93)
+stream = ExtResource("19_f301n")
+attenuation = 1e-05
+panning_strength = 0.0
+script = ExtResource("20_ef1ip")
+intros = Array[AudioStreamMP3]([ExtResource("21_b1l8p"), ExtResource("22_gvr4s"), ExtResource("23_jcfyw")])
+loops = Array[AudioStreamMP3]([ExtResource("19_f301n"), ExtResource("23_yh78q"), ExtResource("25_bpubx")])
+
+[connection signal="timeout" from="CanvasLayer/Timer/Timer" to="CanvasLayer/Timer" method="_on_timer_timeout"]
