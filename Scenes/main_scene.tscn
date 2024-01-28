@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://GameMap.gd" id="5_ral8r"]
 [ext_resource type="Script" path="res://EntitySpawner.gd" id="6_0qoav"]
 [ext_resource type="PackedScene" uid="uid://cm251cojinvmq" path="res://angry_clown.tscn" id="7_p8803"]
-[ext_resource type="PackedScene" uid="uid://cjof0umc2t3qt" path="res://sad_clown.tscn" id="8_3fobc"]
+[ext_resource type="PackedScene" path="res://sad_clown.tscn" id="8_3fobc"]
 [ext_resource type="Texture2D" uid="uid://bls4n3dilt06h" path="res://sprites/carrt.png" id="10_usqra"]
 [ext_resource type="Texture2D" uid="uid://firluthle7hq" path="res://sprites/boxes.png" id="11_b6ci5"]
 [ext_resource type="Script" path="res://ItemBox.gd" id="12_t07k1"]

@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://crivpt3wb2p8f"]
+[gd_scene load_steps=5 format=3 uid="uid://crivpt3wb2p8f"]
 
+[ext_resource type="Texture2D" uid="uid://dyptbt3jne42r" path="res://sprites/helpbkg2.png" id="1_0pjyh"]
 [ext_resource type="Script" path="res://Scenes/backbutton.gd" id="1_altyc"]
+[ext_resource type="Texture2D" uid="uid://bcb6e1kfngw10" path="res://sprites/btn_bkg.png" id="2_7qaqd"]
+[ext_resource type="Texture2D" uid="uid://qwi3ne83gi0i" path="res://sprites/Blackbox.png" id="2_ecvl0"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,13 +13,73 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="."]
-layout_mode = 0
-offset_left = 1016.0
-offset_top = 516.0
-offset_right = 1097.0
-offset_bottom = 597.0
-text = "Back"
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(569, 328)
+scale = Vector2(3.32964, 3.40885)
+texture = ExtResource("1_0pjyh")
+
+[node name="Blackbox" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(-79.5964, 6.93049)
+scale = Vector2(0.480607, 0.470504)
+texture = ExtResource("2_ecvl0")
+
+[node name="Blackbox" type="Sprite2D" parent="Sprite2D/Blackbox"]
+position = Vector2(329.778, -25.2146)
+scale = Vector2(1.08676, 0.773331)
+texture = ExtResource("2_ecvl0")
+
+[node name="Button3" type="Button" parent="."]
+offset_left = 808.0
+offset_top = 474.0
+offset_right = 1024.0
+offset_bottom = 547.0
+text = "Back
+"
+icon = ExtResource("2_7qaqd")
+icon_alignment = 1
 script = ExtResource("1_altyc")
 
-[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 210.0
+offset_top = 176.0
+offset_right = 397.0
+offset_bottom = 240.0
+theme_override_font_sizes/font_size = 46
+text = "Controls"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="."]
+layout_mode = 0
+offset_left = 641.0
+offset_top = 177.0
+offset_right = 1023.0
+offset_bottom = 447.0
+theme_override_font_sizes/font_size = 26
+text = "Short explination on what to 
+do goes here"
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 298.0
+offset_right = 452.0
+offset_bottom = 362.0
+theme_override_font_sizes/font_size = 21
+text = "Arrow keys to move"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="."]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 342.0
+offset_right = 475.0
+offset_bottom = 406.0
+theme_override_font_sizes/font_size = 21
+text = "Z to laugh or use items"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Button3" to="Button3" method="_on_pressed"]

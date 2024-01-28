@@ -1,17 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://plkvtru8xvn0"]
+[gd_scene load_steps=4 format=3 uid="uid://plkvtru8xvn0"]
 
 [ext_resource type="Script" path="res://UITimer.gd" id="1_84qaf"]
 [ext_resource type="FontFile" uid="uid://cuupyhjlg4c34" path="res://bubblkrd (1).ttf" id="2_drr56"]
+[ext_resource type="Texture2D" uid="uid://cqx4j1vxo0434" path="res://sprites/timerbklg.png" id="2_mw1e1"]
 
 [node name="Node2D" type="Node2D"]
+position = Vector2(827, 78)
 script = ExtResource("1_84qaf")
 
+[node name="Timerbklg" type="Sprite2D" parent="."]
+position = Vector2(70.5154, 28.6924)
+scale = Vector2(3.10595, 3.10595)
+texture = ExtResource("2_mw1e1")
+
 [node name="Label" type="Label" parent="."]
-offset_right = 252.0
-offset_bottom = 150.0
+offset_left = -8.0
+offset_top = -2.0
+offset_right = 507.0
+offset_bottom = 148.0
+scale = Vector2(0.3, 0.3)
 theme_override_colors/font_color = Color(0.94902, 0.560784, 0.560784, 1)
 theme_override_fonts/font = ExtResource("2_drr56")
 theme_override_font_sizes/font_size = 200
+text = "00:00"
+metadata/_edit_use_anchors_ = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 150.0
