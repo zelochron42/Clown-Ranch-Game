@@ -51,7 +51,11 @@ func _check_cell_for_tile(check_cell) -> bool: #simple function that checks the 
 
 func _check_cell_for_object(check_cell) -> Node: #function that checks for any moving objects on a specific tile
 	var ob = map.ObjectFromCell(check_cell)
-	if ob != parent: #ignore self
+	if ob != parent && ob != null: #ignore self
+		if ob.has_method("EntryTrigger"):
+			var entered : bool = ob.EntryTrigger(parent)
+			if entered:
+				return null
 		return ob
 	return null
 

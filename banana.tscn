@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dewn3d2b07mb5"]
+
+[ext_resource type="Script" path="res://TilemapObject.gd" id="1_2vfbj"]
+[ext_resource type="Texture2D" uid="uid://2g3ydmw3ync8" path="res://sprites/banana.png" id="1_ro3do"]
+[ext_resource type="Script" path="res://banana.gd" id="1_us577"]
+
+[node name="Banana" type="Sprite2D"]
+texture = ExtResource("1_ro3do")
+script = ExtResource("1_us577")
+remove_delay = 0.5
+
+[node name="TilemapObject" type="Node" parent="."]
+script = ExtResource("1_2vfbj")
+move_time = 0.8

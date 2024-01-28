@@ -51,6 +51,7 @@ var laughter : TextureProgressBar
 @export var linebreak_pause : float = 0.5
 @export var joke_square_range : int = 5
 @export var laugh_drain_force : int = 8
+var tripped : bool = false
 
 func _ready():
 	pathfinding = $Pathfinder
@@ -60,15 +61,17 @@ func _ready():
 	joke_timer = $JokeCooldown
 	laughter = $LaughMeter
 	spawner = $"../EntitySpawner"
+	laughter.set_process(false)
 
 func _process(delta):
-	match state:
-		states.walkdown:
-			_walkdown()
-		states.talking:
-			_joking()
-		states.walkup:
-			_walkup()
+	if !tripped && !tilemap_object.is_tweening:
+		match state:
+			states.walkdown:
+				_walkdown()
+			states.talking:
+				_joking()
+			states.walkup:
+				_walkup()
 func _walkdown():
 	if tilemap_object.is_tweening:
 		return
@@ -80,7 +83,8 @@ func _walkdown():
 		return
 	else:
 		var next_tile : Array[Vector2i] = pathfinding.FindPath(tilemap_object.cell_position, talk_position)
-		tilemap_object.MoveToCell(next_tile[1], true) #the sad clown can move through objects
+		if next_tile.size() > 1:
+			tilemap_object.MoveToCell(next_tile[1], true) #the sad clown can move through objects
 	
 func _joking():
 	pass
@@ -101,6 +105,7 @@ func _joke_routine(this_joke = ""):
 	elif state == states.talking:
 		_laughter_drain()
 		joke_timer.start()
+		laughter.set_process(true)
 
 func _text_appear(line : String) -> void:
 	text.text = line
@@ -132,3 +137,10 @@ func _laughter_drain():
 				var meter = check_obj.find_child("LaughMeter")
 				if meter:
 					meter.AddLaugh(-laugh_drain_force, "bad_joke")
+					
+func Trip(trip_time : float):
+	tripped = true
+	rotation_degrees = 90 + (randi_range(0, 1) * -180)
+	await get_tree().create_timer(trip_time).timeout
+	tripped = false
+	rotation_degrees = 0

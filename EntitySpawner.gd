@@ -30,7 +30,7 @@ func ThreatReturn(threat_name : String):
 func _timed_respawn(id : int):
 	respawn_timers[id].start()
 	await respawn_timers[id].timeout
-	var start_pos = Vector2i(-1, 0)
+	var start_pos = Vector2i(15, 0)
 	var new_threat = threats[id].instantiate()
 	new_threat.entry_position = start_pos
 	var tmo = new_threat.find_child("TilemapObject")

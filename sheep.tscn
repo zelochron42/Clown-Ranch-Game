@@ -9,10 +9,11 @@
 [ext_resource type="Script" path="res://Pathfinder.gd" id="7_ag44y"]
 
 [node name="Sheep" type="Sprite2D"]
+y_sort_enabled = true
 position = Vector2(100, 90)
 texture = ExtResource("1_p65py")
 script = ExtResource("2_erifq")
-trailer_position = Vector2i(-12, 9)
+trailer_position = Vector2i(4, 9)
 
 [node name="TilemapObject" type="Node" parent="."]
 script = ExtResource("3_qtf86")

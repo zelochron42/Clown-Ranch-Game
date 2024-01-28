@@ -19,6 +19,7 @@ script = ExtResource("3_46vin")
 
 [node name="Pathfinder" type="Node" parent="."]
 script = ExtResource("4_h75xa")
+draw_path = true
 
 [node name="LaughMeter" type="TextureProgressBar" parent="."]
 z_index = 2

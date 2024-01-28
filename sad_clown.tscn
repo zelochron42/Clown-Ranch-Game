@@ -17,8 +17,8 @@ texture = SubResource("CompressedTexture2D_23dfk")
 region_enabled = true
 region_rect = Rect2(0, 0, 14, 15)
 script = ExtResource("1_hl46v")
-talk_position = Vector2i(-10, 7)
-text_speed = 0.04
+talk_position = Vector2i(6, 7)
+text_speed = 0.025
 
 [node name="TilemapObject" type="Node" parent="."]
 script = ExtResource("2_kuvlj")
