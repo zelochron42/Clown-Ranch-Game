@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://c025ajxv8ghau"]
+
+[ext_resource type="Texture2D" uid="uid://bhwno304mxnvs" path="res://sprites/irs_sheet.png" id="1_yjkkx"]
+[ext_resource type="Script" path="res://IRS_behavior.gd" id="2_pa34o"]
+[ext_resource type="Script" path="res://TilemapObject.gd" id="3_6xs5b"]
+[ext_resource type="Script" path="res://Pathfinder.gd" id="4_xf24t"]
+[ext_resource type="Script" path="res://CreatureSprite.gd" id="5_7dmdu"]
+
+[sub_resource type="Animation" id="Animation_qepne"]
+resource_name = "text_scrollin"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f1v5h"]
+_data = {
+"text_scrollin": SubResource("Animation_qepne")
+}
+
+[node name="IRS" type="Sprite2D"]
+position = Vector2(250, 72)
+texture = ExtResource("1_yjkkx")
+offset = Vector2(0, -4.815)
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+script = ExtResource("2_pa34o")
+entry_position = Vector2i(16, 0)
+
+[node name="TilemapObject" type="Node" parent="."]
+script = ExtResource("3_6xs5b")
+move_time = 0.4
+
+[node name="Pathfinder" type="Node" parent="."]
+script = ExtResource("4_xf24t")
+
+[node name="CreatureSprite" type="Node" parent="."]
+script = ExtResource("5_7dmdu")
+animate_speed = 5.0
+sprite_size = Vector2i(16, 32)
+sprite_cells = Vector2i(4, 3)
+
+[node name="Label" type="Label" parent="."]
+z_index = 10
+offset_left = -90.0
+offset_top = -41.0
+offset_right = 94.0
+offset_bottom = 8.0
+scale = Vector2(0.419821, 0.418359)
+pivot_offset = Vector2(90, 0)
+horizontal_alignment = 1
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="TextAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f1v5h")
+}
+
+[node name="TextHide" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true

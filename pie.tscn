@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj2kxxfoiailm"]
+
+[ext_resource type="Script" path="res://Pie.gd" id="1_3f4r5"]
+[ext_resource type="Texture2D" uid="uid://cetx5y68xa8pl" path="res://sprites/pie.png" id="2_jikqh"]
+
+[node name="Pie" type="RigidBody2D"]
+position = Vector2(119, 67)
+gravity_scale = 0.0
+script = ExtResource("1_3f4r5")
+speed = 150.0
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_jikqh")

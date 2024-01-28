@@ -27,7 +27,10 @@ func _calculate_grid(ignore_objects : bool, target : Node = null):
 	if !ignore_objects:
 		var objs = tilemap.objects
 		for o in objs:
-			if o != parent && o != target.parent && !o.has_method("EntryTrigger"):
+			var parent_check = false
+			if target != null:
+				parent_check = (o != target.parent)
+			if o != parent && parent_check && !o.has_method("EntryTrigger"):
 				var tmo = o.find_child("TilemapObject")
 				if tmo:
 					astar.set_point_solid(tmo.cell_position, true)

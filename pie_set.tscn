@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://cewe1ot4qfnqd"]
+
+[ext_resource type="Texture2D" uid="uid://firluthle7hq" path="res://sprites/boxes.png" id="1_gnf6a"]
+[ext_resource type="Script" path="res://ItemBox.gd" id="2_0bl5y"]
+[ext_resource type="Script" path="res://TilemapObject.gd" id="3_uf3b7"]
+
+[node name="PieSet" type="Node"]
+
+[node name="PieBox" type="Sprite2D" parent="."]
+position = Vector2(80, 103)
+texture = ExtResource("1_gnf6a")
+region_enabled = true
+region_rect = Rect2(1, 17, 15, 15)
+script = ExtResource("2_0bl5y")
+item = "pie"
+quantity = 1
+
+[node name="TilemapObject" type="Node" parent="PieBox" node_paths=PackedStringArray("map")]
+script = ExtResource("3_uf3b7")
+map = NodePath("")
+
+[node name="PieBox2" type="Sprite2D" parent="."]
+position = Vector2(165, 61)
+texture = ExtResource("1_gnf6a")
+region_enabled = true
+region_rect = Rect2(1, 17, 15, 15)
+script = ExtResource("2_0bl5y")
+item = "pie"
+quantity = 1
+
+[node name="TilemapObject" type="Node" parent="PieBox2" node_paths=PackedStringArray("map")]
+script = ExtResource("3_uf3b7")
+map = NodePath("")
+
+[node name="PieBox3" type="Sprite2D" parent="."]
+position = Vector2(456, 119)
+texture = ExtResource("1_gnf6a")
+region_enabled = true
+region_rect = Rect2(1, 17, 15, 15)
+script = ExtResource("2_0bl5y")
+item = "pie"
+quantity = 1
+
+[node name="TilemapObject" type="Node" parent="PieBox3" node_paths=PackedStringArray("map")]
+script = ExtResource("3_uf3b7")
+map = NodePath("")
+
+[node name="PieBox4" type="Sprite2D" parent="."]
+position = Vector2(281, 138)
+texture = ExtResource("1_gnf6a")
+region_enabled = true
+region_rect = Rect2(1, 17, 15, 15)
+script = ExtResource("2_0bl5y")
+item = "pie"
+quantity = 1
+
+[node name="TilemapObject" type="Node" parent="PieBox4" node_paths=PackedStringArray("map")]
+script = ExtResource("3_uf3b7")
+map = NodePath("")

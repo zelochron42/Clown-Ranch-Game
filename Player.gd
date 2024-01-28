@@ -9,11 +9,13 @@ enum items {none, banana, rake, balloon, pie}
 @export var current_item : items
 @export var item_quantity : int
 @export var item_textures : Array[Texture2D]
+var laugh_anim : AnimationPlayer
 
 var ui_item_label : Label
 var ui_item_texture : TextureRect
 
 var bananadrop = preload("res://banana.tscn")
+var pie_projectile = preload("res://pie.tscn")
 
 var tripped : bool = false
 
@@ -21,8 +23,9 @@ func _ready():
 	tilemap_object = $TilemapObject
 	ui_item_label = $"../CanvasLayer/ItemLabel"
 	ui_item_texture = $"../CanvasLayer/ItemTexture"
+	laugh_anim = $LaughAnimation
 
-func _process(delta):
+func _process(_delta):
 	if !tripped && !tilemap_object.is_tweening:
 		if Input.is_action_pressed("move_down"):
 			TryMove(Vector2i.DOWN)
@@ -46,6 +49,8 @@ func MakeLaugh(target, value : float = laugh_force, type : String = "unspecified
 	var meter = target.find_child("LaughMeter")
 	if meter:
 		meter.AddLaugh(value, type)
+	elif target.has_method("FakeLaugh") && type == "laugh":
+		target.FakeLaugh()
 		
 func _perform_action(): #function for determining which action happens when the player presses the button
 	var success : bool = false
@@ -54,20 +59,24 @@ func _perform_action(): #function for determining which action happens when the 
 			_laugh_action()
 		items.banana:
 			success = _drop_banana()
+		items.pie:
+			success = _throw_pie()
 	if success:
 		item_quantity -= 1
 		if item_quantity <= 0:
 			PickupItem("none", 0)
 	
 func _laugh_action():
-	print("laughing")
-	for x in range(-laugh_square_range, laugh_square_range+1):
-		for y in range(-laugh_square_range, laugh_square_range+1):
-			var check_x = tilemap_object.cell_position.x + x
-			var check_y = tilemap_object.cell_position.y + y
-			var check_obj = tilemap_object.map.ObjectFromCell(Vector2i(check_x, check_y))
-			if (check_obj != null):
-				MakeLaugh(check_obj, laugh_force, "laugh")
+	if !laugh_anim.is_playing():
+		for x in range(-laugh_square_range, laugh_square_range+1):
+			for y in range(-laugh_square_range, laugh_square_range+1):
+				var check_x = tilemap_object.cell_position.x + x
+				var check_y = tilemap_object.cell_position.y + y
+				var check_obj = tilemap_object.map.ObjectFromCell(Vector2i(check_x, check_y))
+				if (check_obj != null):
+					MakeLaugh(check_obj, laugh_force, "laugh")
+		laugh_anim.play("haha_grow")
+	
 
 func PickupItem(id : String, quantity : int = 1):
 	match id:
@@ -104,6 +113,13 @@ func _drop_banana() -> bool:
 	var tmo = new_banana.find_child("TilemapObject")
 	get_tree().current_scene.add_child(new_banana)
 	tmo.SetCell(new_tile)
+	return true
+
+func _throw_pie() -> bool:
+	var new_pie = pie_projectile.instantiate()
+	get_tree().current_scene.add_child(new_pie)
+	new_pie.position = position
+	new_pie.ThrowPie(facing_direction)
 	return true
 	
 func Trip(trip_time : float):
