@@ -3,6 +3,7 @@ extends Sprite2D
 @export var trailer_position : Vector2i
 var laughter : TextureProgressBar
 var tilemap_object
+var spawner
 var pathfinding
 var directions = [Vector2i.DOWN, Vector2i.UP, Vector2i.LEFT, Vector2i.RIGHT]
 
@@ -10,6 +11,7 @@ func _ready():
 	tilemap_object = $TilemapObject
 	laughter = $LaughMeter
 	pathfinding = $Pathfinder
+	spawner = $"../EntitySpawner"
 
 func _process(delta):
 	if laughter.laugh_value > 0:
@@ -29,4 +31,5 @@ func _laughing_behavior():
 	if p.size() > 1:
 		tilemap_object.MoveToCell(p[1])
 	elif my_pos == end_pos:
+		spawner.SheepReturn()
 		tilemap_object.Remove()

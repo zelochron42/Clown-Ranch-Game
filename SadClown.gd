@@ -138,9 +138,9 @@ func _laughter_drain():
 				if meter:
 					meter.AddLaugh(-laugh_drain_force, "bad_joke")
 					
-func Trip(trip_time : float):
-	tripped = true
-	rotation_degrees = 90 + (randi_range(0, 1) * -180)
-	await get_tree().create_timer(trip_time).timeout
-	tripped = false
-	rotation_degrees = 0
+#func Trip(trip_time : float):
+	#tripped = true
+	#rotation_degrees = 90 + (randi_range(0, 1) * -180)
+	#await get_tree().create_timer(trip_time).timeout
+	#tripped = false
+	#rotation_degrees = 0

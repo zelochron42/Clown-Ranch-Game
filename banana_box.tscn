@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cb36p6m5d2q00"]
+
+[ext_resource type="Texture2D" uid="uid://firluthle7hq" path="res://sprites/boxes.png" id="1_lyulr"]
+[ext_resource type="Script" path="res://ItemBox.gd" id="2_bpoy8"]
+[ext_resource type="Script" path="res://TilemapObject.gd" id="3_3oq22"]
+
+[node name="BananaBox" type="Sprite2D"]
+position = Vector2(80, 84)
+texture = ExtResource("1_lyulr")
+region_enabled = true
+region_rect = Rect2(1, 1, 15, 15)
+script = ExtResource("2_bpoy8")
+item = "banana"
+quantity = 1
+
+[node name="TilemapObject" type="Node" parent="." node_paths=PackedStringArray("map")]
+script = ExtResource("3_3oq22")
+map = NodePath("")

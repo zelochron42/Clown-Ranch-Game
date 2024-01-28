@@ -3,6 +3,8 @@ extends Node
 @onready var label = $Label #Reference to the lable node
 @onready var timer = $Timer #Reference to timer node
 
+@export var spawner : Node
+
 
 var time_left
 var minute 
@@ -17,13 +19,16 @@ func time_left_counter():
 	second = int(time_left) % 60
 	return[minute,second]
 	
+func ResetTimer():
+	timer.stop()
+	timer.start()
 
 func _process(delta):
 	label.text="%02d:%02d" % time_left_counter()
 	#Anycode below this is what triggers when time hits 0:00
 	#Id imagine a switch statement or even a random number gen for spawning enamies during the wave
 	if second==0 and minute ==0:
-		print("This is when an event must happen")
+		spawner.GameOver()
 	
 #Only thing Now is resetting the timer when loading a new scene
 

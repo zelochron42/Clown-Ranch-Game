@@ -7,6 +7,9 @@ var tilemap_object
 var pathfinding
 var tripped : bool = false
 var muddied : bool = false
+var text_anim : AnimationPlayer
+var text_label : Label
+var text_timer : Timer
 @export var entry_position : Vector2i
 
 func _ready():
@@ -14,7 +17,10 @@ func _ready():
 	pathfinding = $Pathfinder
 	map = get_tree().current_scene.find_child("TileMap")
 	spawner = $"../EntitySpawner"
-
+	text_anim = $TextAnim
+	text_label = $Label
+	text_timer = $TextHide
+	
 func _process(delta):
 	if !tilemap_object.is_tweening && !tripped:
 		if !muddied:
@@ -58,6 +64,7 @@ func _nearest_animal() -> Node:
 	return target
 	
 func _retreat():
+	
 	if tilemap_object.cell_position != entry_position:
 		var path = pathfinding.FindPath(tilemap_object.cell_position, entry_position)
 		if path.size() > 1:
@@ -73,3 +80,16 @@ func Trip(trip_time : float):
 	await get_tree().create_timer(trip_time).timeout
 	tripped = false
 	rotation_degrees = 0
+	text_anim.stop()
+	text_timer.stop()
+	text_label.text = "MY SUIT IS DIRTY!\nMUST CHANGE!"
+	text_anim.play("text_scrollin")
+	
+func FakeLaugh():
+	if !muddied && !text_anim.is_playing() && text_timer.is_stopped():
+		text_label.text = "Laughter is not in\nmy job description."
+		text_anim.play("text_scrollin")
+		await text_anim.animation_finished
+		text_timer.start()
+		await text_timer.timeout
+		text_label.visible_ratio = 0
