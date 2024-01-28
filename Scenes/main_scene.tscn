@@ -1,8 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://c1s4kykt7sebs"]
+[gd_scene load_steps=22 format=3 uid="uid://c1s4kykt7sebs"]
 
 [ext_resource type="Texture2D" uid="uid://cru6d25lgjfqw" path="res://sprites/laugh_face.png" id="1_ppuft"]
 [ext_resource type="Script" path="res://Player.gd" id="2_k5ot5"]
+[ext_resource type="Texture2D" uid="uid://2g3ydmw3ync8" path="res://sprites/banana.png" id="3_6ak6d"]
 [ext_resource type="Script" path="res://TilemapObject.gd" id="3_jc4s2"]
+[ext_resource type="Texture2D" uid="uid://cff5pygu1bhld" path="res://sprites/laugh_face_back.png" id="4_nktr4"]
 [ext_resource type="Texture2D" uid="uid://ccv6go4oo7uxk" path="res://sprites/d01.png" id="4_pdtut"]
 [ext_resource type="Texture2D" uid="uid://3hmmim3p737o" path="res://sprites/groundtiles.png" id="5_c1cc2"]
 [ext_resource type="Script" path="res://GameMap.gd" id="5_ral8r"]
@@ -12,6 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://bls4n3dilt06h" path="res://sprites/carrt.png" id="10_usqra"]
 [ext_resource type="Texture2D" uid="uid://firluthle7hq" path="res://sprites/boxes.png" id="11_b6ci5"]
 [ext_resource type="Script" path="res://ItemBox.gd" id="12_t07k1"]
+[ext_resource type="Texture2D" uid="uid://bhwno304mxnvs" path="res://sprites/irs_sheet.png" id="15_4lepr"]
+[ext_resource type="Script" path="res://Scenes/IRS_behavior.gd" id="16_obsuq"]
+[ext_resource type="Script" path="res://Pathfinder.gd" id="17_y8k7x"]
+[ext_resource type="Script" path="res://CreatureSprite.gd" id="18_empag"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4kkab"]
 texture = ExtResource("4_pdtut")
@@ -431,6 +437,7 @@ texture = ExtResource("1_ppuft")
 script = ExtResource("2_k5ot5")
 laugh_square_range = 2
 item_quantity = 5
+item_textures = Array[Texture2D]([ExtResource("1_ppuft"), ExtResource("3_6ak6d"), ExtResource("4_nktr4"), ExtResource("4_nktr4"), ExtResource("4_nktr4")])
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(3.375, 3.375)
@@ -459,11 +466,11 @@ sheep_count = 25
 sheep_zone = Rect2i(16, 2, 10, 7)
 
 [node name="MadReset" type="Timer" parent="EntitySpawner"]
-wait_time = 15.0
+wait_time = 18.0
 one_shot = true
 
 [node name="SadReset" type="Timer" parent="EntitySpawner"]
-wait_time = 5.0
+wait_time = 10.0
 one_shot = true
 
 [node name="AngryClown" parent="." instance=ExtResource("7_p8803")]
@@ -478,56 +485,148 @@ entry_position = Vector2i(16, 0)
 
 [node name="Carrt" type="Sprite2D" parent="."]
 y_sort_enabled = true
-position = Vector2(66, 167)
+position = Vector2(39, 151)
 texture = ExtResource("10_usqra")
-offset = Vector2(0, -17.335)
+offset = Vector2(0, -13.3)
 region_enabled = true
 region_rect = Rect2(0, 0, 96, 57)
 
-[node name="Box" type="Sprite2D" parent="."]
+[node name="BananaBox" type="Sprite2D" parent="."]
 position = Vector2(133, 88)
 texture = ExtResource("11_b6ci5")
 region_enabled = true
 region_rect = Rect2(1, 1, 15, 15)
 script = ExtResource("12_t07k1")
 item = "banana"
+quantity = 1
 
-[node name="TilemapObject" type="Node" parent="Box" node_paths=PackedStringArray("map")]
+[node name="TilemapObject" type="Node" parent="BananaBox" node_paths=PackedStringArray("map")]
 script = ExtResource("3_jc4s2")
 map = NodePath("../../TileMap")
 
-[node name="Box2" type="Sprite2D" parent="."]
+[node name="BalloonBox" type="Sprite2D" parent="."]
 position = Vector2(165, 88)
 texture = ExtResource("11_b6ci5")
 region_enabled = true
 region_rect = Rect2(17, 1, 15, 15)
 script = ExtResource("12_t07k1")
 item = "banana"
+quantity = 1
 
-[node name="TilemapObject" type="Node" parent="Box2" node_paths=PackedStringArray("map")]
+[node name="TilemapObject" type="Node" parent="BalloonBox" node_paths=PackedStringArray("map")]
 script = ExtResource("3_jc4s2")
 map = NodePath("../../TileMap")
 
-[node name="Box3" type="Sprite2D" parent="."]
+[node name="RakeBox" type="Sprite2D" parent="."]
 position = Vector2(149, 88)
 texture = ExtResource("11_b6ci5")
 region_enabled = true
 region_rect = Rect2(17, 17, 15, 15)
 script = ExtResource("12_t07k1")
 item = "banana"
+quantity = 1
 
-[node name="TilemapObject" type="Node" parent="Box3" node_paths=PackedStringArray("map")]
+[node name="TilemapObject" type="Node" parent="RakeBox" node_paths=PackedStringArray("map")]
 script = ExtResource("3_jc4s2")
 map = NodePath("../../TileMap")
 
-[node name="Box4" type="Sprite2D" parent="."]
+[node name="PieBox" type="Sprite2D" parent="."]
 position = Vector2(181, 88)
 texture = ExtResource("11_b6ci5")
 region_enabled = true
 region_rect = Rect2(1, 17, 15, 15)
 script = ExtResource("12_t07k1")
 item = "banana"
+quantity = 1
 
-[node name="TilemapObject" type="Node" parent="Box4" node_paths=PackedStringArray("map")]
+[node name="TilemapObject" type="Node" parent="PieBox" node_paths=PackedStringArray("map")]
 script = ExtResource("3_jc4s2")
 map = NodePath("../../TileMap")
+
+[node name="IRS" type="Sprite2D" parent="."]
+position = Vector2(250, 72)
+texture = ExtResource("15_4lepr")
+offset = Vector2(0, -4.815)
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 32)
+script = ExtResource("16_obsuq")
+
+[node name="TilemapObject" type="Node" parent="IRS"]
+script = ExtResource("3_jc4s2")
+move_time = 0.6
+
+[node name="Pathfinder" type="Node" parent="IRS"]
+script = ExtResource("17_y8k7x")
+
+[node name="CreatureSprite" type="Node" parent="IRS"]
+script = ExtResource("18_empag")
+animate_speed = 5.0
+sprite_size = Vector2i(16, 32)
+sprite_cells = Vector2i(4, 3)
+
+[node name="Label" type="Label" parent="IRS"]
+modulate = Color(1, 0, 0, 1)
+z_index = 10
+offset_left = -90.0
+offset_top = -30.0
+offset_right = 94.0
+offset_bottom = -7.0
+scale = Vector2(0.258913, 0.258011)
+pivot_offset = Vector2(90, 0)
+text = "IMMUNE TO LAUGHTER"
+horizontal_alignment = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 25
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -233.0
+offset_right = -95.0
+offset_bottom = -210.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(2.11917, 2.11917)
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Press Z"
+horizontal_alignment = 1
+
+[node name="ItemLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -154.0
+offset_top = -74.9999
+offset_right = -99.0
+offset_bottom = -51.9999
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(2.21889, 2.21889)
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "LAUGH"
+horizontal_alignment = 1
+
+[node name="ItemTexture" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -111.0
+offset_top = -140.0
+offset_right = -71.0
+offset_bottom = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(2.5155, 2.5155)
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("1_ppuft")

@@ -1,17 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://crbsnk1sdhtbj"]
+[gd_scene load_steps=9 format=3 uid="uid://crbsnk1sdhtbj"]
 
-[ext_resource type="Texture2D" uid="uid://cy843ccv11608" path="res://sprites/sheep_prototype.png" id="1_p65py"]
+[ext_resource type="Texture2D" uid="uid://c20iuaci7ych3" path="res://sprites/sheep_sheet.png" id="1_tb4gj"]
 [ext_resource type="Script" path="res://SheepBehavior.gd" id="2_erifq"]
 [ext_resource type="Script" path="res://TilemapObject.gd" id="3_qtf86"]
 [ext_resource type="Texture2D" uid="uid://cff5pygu1bhld" path="res://sprites/laugh_face_back.png" id="4_0d5ii"]
 [ext_resource type="Texture2D" uid="uid://ccrgyhm8lnuf7" path="res://sprites/laugh_face_purple.png" id="5_e4y28"]
 [ext_resource type="Script" path="res://LaughMeter.gd" id="6_vgvxx"]
 [ext_resource type="Script" path="res://Pathfinder.gd" id="7_ag44y"]
+[ext_resource type="Script" path="res://CreatureSprite.gd" id="8_yxewo"]
 
 [node name="Sheep" type="Sprite2D"]
 y_sort_enabled = true
 position = Vector2(100, 90)
-texture = ExtResource("1_p65py")
+texture = ExtResource("1_tb4gj")
+region_enabled = true
+region_rect = Rect2(0, 0, 18, 18)
 script = ExtResource("2_erifq")
 trailer_position = Vector2i(4, 9)
 
@@ -22,10 +25,11 @@ move_time = 0.8
 [node name="LaughMeter" type="TextureProgressBar" parent="."]
 z_index = 2
 layout_direction = 1
-offset_left = -8.0
-offset_top = -26.0
-offset_right = 8.0
-offset_bottom = -10.0
+offset_left = -6.0
+offset_top = -23.0
+offset_right = 10.0
+offset_bottom = -7.0
+scale = Vector2(0.75, 0.75)
 max_value = 16.0
 step = 0.1
 fill_mode = 3
@@ -42,3 +46,9 @@ autostart = true
 
 [node name="Pathfinder" type="Node" parent="."]
 script = ExtResource("7_ag44y")
+
+[node name="CreatureSprite" type="Node" parent="."]
+script = ExtResource("8_yxewo")
+animate_speed = 5.0
+sprite_size = Vector2i(18, 18)
+sprite_cells = Vector2i(4, 3)

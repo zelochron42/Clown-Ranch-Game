@@ -16,25 +16,26 @@ happiness_threshold = 90.0
 
 [node name="TilemapObject" type="Node" parent="."]
 script = ExtResource("3_46vin")
+move_time = 0.3
 
 [node name="Pathfinder" type="Node" parent="."]
 script = ExtResource("4_h75xa")
-draw_path = true
 
 [node name="LaughMeter" type="TextureProgressBar" parent="."]
 z_index = 2
 layout_direction = 1
-offset_left = -8.0
-offset_top = -26.0
-offset_right = 8.0
-offset_bottom = -10.0
+offset_left = -6.0
+offset_top = -22.0
+offset_right = 10.0
+offset_bottom = -6.0
+scale = Vector2(0.75, 0.75)
 max_value = 16.0
 step = 0.1
 fill_mode = 3
 texture_under = ExtResource("5_8dp05")
 texture_progress = ExtResource("6_f5ttl")
 script = ExtResource("7_vehc5")
-laugh_sources = Array[String](["tickle"])
+laugh_sources = Array[String](["unspecified", "tickle", "laugh", "bad_joke"])
 drain_rate = 0.25
 
 [node name="Timer" type="Timer" parent="LaughMeter"]

@@ -8,6 +8,10 @@ var facing_direction : Vector2i
 enum items {none, banana, rake, balloon, pie}
 @export var current_item : items
 @export var item_quantity : int
+@export var item_textures : Array[Texture2D]
+
+var ui_item_label : Label
+var ui_item_texture : TextureRect
 
 var bananadrop = preload("res://banana.tscn")
 
@@ -15,6 +19,8 @@ var tripped : bool = false
 
 func _ready():
 	tilemap_object = $TilemapObject
+	ui_item_label = $"../CanvasLayer/ItemLabel"
+	ui_item_texture = $"../CanvasLayer/ItemTexture"
 
 func _process(delta):
 	if !tripped && !tilemap_object.is_tweening:
@@ -42,14 +48,16 @@ func MakeLaugh(target, value : float = laugh_force, type : String = "unspecified
 		meter.AddLaugh(value, type)
 		
 func _perform_action(): #function for determining which action happens when the player presses the button
+	var success : bool = false
 	match current_item:
 		items.none:
 			_laugh_action()
 		items.banana:
-			_drop_banana()
-	item_quantity -= 1
-	if item_quantity <= 0:
-		current_item = items.none
+			success = _drop_banana()
+	if success:
+		item_quantity -= 1
+		if item_quantity <= 0:
+			PickupItem("none", 0)
 	
 func _laugh_action():
 	print("laughing")
@@ -61,17 +69,42 @@ func _laugh_action():
 			if (check_obj != null):
 				MakeLaugh(check_obj, laugh_force, "laugh")
 
-func PickupItem(id : String, quantity : int):
+func PickupItem(id : String, quantity : int = 1):
+	match id:
+		"none":
+			ui_item_texture.texture = item_textures[0]
+			ui_item_label.text = "LAUGH"
+		"banana":
+			ui_item_texture.texture = item_textures[1]
+			ui_item_label.text = "BANANA"
+		"rake":
+			ui_item_texture.texture = item_textures[2]
+			ui_item_label.text = "RAKE"
+		"balloon":
+			ui_item_texture.texture = item_textures[3]
+			ui_item_label.text = "BALLOON"
+		"pie":
+			ui_item_texture.texture = item_textures[4]
+			ui_item_label.text = "PIE"
+		_:
+			printerr("unrecognized item type!")
+			return
 	current_item = items[id]
 	item_quantity = quantity
 
-func _drop_banana():
+func _drop_banana() -> bool:
 	print("dropping banana")
 	var new_tile = tilemap_object.goal_cell + facing_direction
+	
+	var occupying_object = tilemap_object.map.ObjectFromCell(new_tile)
+	if occupying_object:
+		return false
+		
 	var new_banana = bananadrop.instantiate()
 	var tmo = new_banana.find_child("TilemapObject")
 	get_tree().current_scene.add_child(new_banana)
 	tmo.SetCell(new_tile)
+	return true
 	
 func Trip(trip_time : float):
 	tripped = true

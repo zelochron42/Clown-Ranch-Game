@@ -61,7 +61,7 @@ func _ready():
 	joke_timer = $JokeCooldown
 	laughter = $LaughMeter
 	spawner = $"../EntitySpawner"
-	laughter.set_process(false)
+	laughter.enabled = false
 
 func _process(delta):
 	if !tripped && !tilemap_object.is_tweening:
@@ -105,7 +105,7 @@ func _joke_routine(this_joke = ""):
 	elif state == states.talking:
 		_laughter_drain()
 		joke_timer.start()
-		laughter.set_process(true)
+		laughter.enabled = true
 
 func _text_appear(line : String) -> void:
 	text.text = line

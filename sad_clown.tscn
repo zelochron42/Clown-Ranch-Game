@@ -58,19 +58,21 @@ script = ExtResource("4_5o14c")
 [node name="LaughMeter" type="TextureProgressBar" parent="."]
 z_index = 2
 layout_direction = 1
-offset_left = -8.0
-offset_top = -26.0
-offset_right = 8.0
-offset_bottom = -10.0
+offset_left = -6.0
+offset_top = -37.0
+offset_right = 10.0
+offset_bottom = -21.0
+scale = Vector2(0.75, 0.75)
 max_value = 16.0
 step = 0.1
 fill_mode = 3
 texture_under = ExtResource("5_jnp5g")
 texture_progress = ExtResource("6_l8uy4")
 script = ExtResource("7_eu40y")
-laugh_sources = Array[String](["laugh"])
+laugh_sources = Array[String](["unspecified", "tickle", "laugh", "bad_joke"])
 drain_rate = 0.0
 
 [node name="Timer" type="Timer" parent="LaughMeter"]
 process_callback = 0
 wait_time = 0.75
+autostart = true
