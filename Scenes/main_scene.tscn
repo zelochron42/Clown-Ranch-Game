@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c1s4kykt7sebs"]
+[gd_scene load_steps=39 format=3 uid="uid://c1s4kykt7sebs"]
 
 [ext_resource type="Texture2D" uid="uid://dlfd7l0rtrtgd" path="res://sprites/mainclown_sheet.png" id="1_b4sce"]
 [ext_resource type="Texture2D" uid="uid://cru6d25lgjfqw" path="res://sprites/laugh_face.png" id="1_ppuft"]
@@ -15,9 +15,18 @@
 [ext_resource type="Texture2D" uid="uid://do7iw20xv4dcu" path="res://sprites/fence.png" id="13_ir3d7"]
 [ext_resource type="Texture2D" uid="uid://divv27ha1wuc7" path="res://sprites/gate.png" id="14_p4ocm"]
 [ext_resource type="Script" path="res://CreatureSprite.gd" id="18_empag"]
+[ext_resource type="Texture2D" uid="uid://cu5hn87vf64uv" path="res://sprites/irs_intro_2.png" id="19_8h313"]
+[ext_resource type="AudioStream" uid="uid://b8pkpcwb4ye5t" path="res://audio/Loop_Clown_Country.mp3" id="19_f301n"]
 [ext_resource type="Texture2D" uid="uid://cetx5y68xa8pl" path="res://sprites/pie.png" id="19_ica1i"]
+[ext_resource type="Script" path="res://Scenes/BackgroundMusic.gd" id="20_ef1ip"]
+[ext_resource type="AudioStream" uid="uid://b0wks2jobybse" path="res://audio/Intro_Clown_Country.mp3" id="21_b1l8p"]
+[ext_resource type="AudioStream" uid="uid://df0e74pfqtvbf" path="res://audio/intro_clown_boss.mp3" id="22_gvr4s"]
 [ext_resource type="Script" path="res://UITimer.gd" id="22_jrrcc"]
+[ext_resource type="AudioStream" uid="uid://crp7gdx5a0165" path="res://audio/irs_intro_screen.mp3" id="23_jcfyw"]
 [ext_resource type="FontFile" uid="uid://cuupyhjlg4c34" path="res://bubblkrd (1).ttf" id="23_s5jwl"]
+[ext_resource type="AudioStream" uid="uid://dodyda3mp6y6s" path="res://audio/loop_clown_boss.mp3" id="23_yh78q"]
+[ext_resource type="AudioStream" uid="uid://6dyksig12whb" path="res://audio/clown_title.mp3" id="25_bpubx"]
+[ext_resource type="Texture2D" uid="uid://bq1ie53628ts7" path="res://sprites/irs_intro_1.png" id="26_jqfwi"]
 
 [sub_resource type="Animation" id="Animation_kj7re"]
 resource_name = "haha_grow"
@@ -474,6 +483,51 @@ sources/1 = SubResource("TileSetAtlasSource_rlast")
 
 [sub_resource type="Theme" id="Theme_pdae8"]
 
+[sub_resource type="Animation" id="Animation_clstu"]
+resource_name = "IRS"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1000), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("26_jqfwi"), ExtResource("19_8h313")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y0ed5"]
+_data = {
+"IRS": SubResource("Animation_clstu")
+}
+
 [node name="MainScene" type="Node2D"]
 y_sort_enabled = true
 
@@ -534,13 +588,16 @@ tile_set = SubResource("TileSet_k0nma")
 format = 2
 layer_0/tile_data = PackedInt32Array(0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 13, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0, 25, 0, 0, 26, 0, 0, 27, 0, 0, 28, 0, 0, 29, 0, 0, 30, 0, 0, 31, 0, 0)
 
-[node name="EntitySpawner" type="Node" parent="." node_paths=PackedStringArray("center_text", "round_timer", "counter_text")]
+[node name="EntitySpawner" type="Node" parent="." node_paths=PackedStringArray("center_text", "round_timer", "counter_text", "music", "irs_anim", "irs_graphic")]
 script = ExtResource("6_0qoav")
 center_text = NodePath("../CanvasLayer/CenterText")
 round_timer = NodePath("../CanvasLayer/Timer")
 counter_text = NodePath("../CanvasLayer/Counter/Label")
 sheep_counts = Array[int]([6, 12, 20])
 sheep_zone = Rect2i(17, 3, 10, 5)
+music = NodePath("../BackgroundMusic")
+irs_anim = NodePath("../CanvasLayer/IRS_intro/AnimationPlayer")
+irs_graphic = NodePath("../CanvasLayer/IRS_intro")
 
 [node name="MadReset" type="Timer" parent="EntitySpawner"]
 wait_time = 12.0
@@ -673,5 +730,28 @@ theme = SubResource("Theme_pdae8")
 bbcode_enabled = true
 fit_content = true
 autowrap_mode = 0
+
+[node name="IRS_intro" type="TextureRect" parent="CanvasLayer"]
+visible = false
+z_index = 501
+offset_top = 1000.0
+offset_right = 340.0
+offset_bottom = 1188.0
+scale = Vector2(3.47826, 3.47826)
+texture = ExtResource("26_jqfwi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/IRS_intro"]
+libraries = {
+"": SubResource("AnimationLibrary_y0ed5")
+}
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(240, 93)
+stream = ExtResource("19_f301n")
+attenuation = 1e-05
+panning_strength = 0.0
+script = ExtResource("20_ef1ip")
+intros = Array[AudioStreamMP3]([ExtResource("21_b1l8p"), ExtResource("22_gvr4s"), ExtResource("23_jcfyw")])
+loops = Array[AudioStreamMP3]([ExtResource("19_f301n"), ExtResource("23_yh78q"), ExtResource("25_bpubx")])
 
 [connection signal="timeout" from="CanvasLayer/Timer/Timer" to="CanvasLayer/Timer" method="_on_timer_timeout"]

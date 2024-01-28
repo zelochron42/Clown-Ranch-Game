@@ -9,7 +9,7 @@ extends Node
 var round_texts : Array[String] = [
 	"[center]Tickle the sheep to get them to come home![/center]",
 	"[center]The sad clown and the mad clown will bring the mood down![/center]",
-	"[center]The IRS cannot laugh! \nYou'll have to find new ways to stop them![/center]",
+	" ",
 	"[center]You win![/center]"
 ]
 
@@ -27,6 +27,10 @@ var active_sheep : int = 0
 var total_score : int = 0
 var round_in_progress : bool = false
 @export var round_number = 0
+
+@export var music : AudioStreamPlayer2D
+@export var irs_anim : AnimationPlayer
+@export var irs_graphic : TextureRect
 
 func _ready():
 	respawn_timers = [$MadReset, $SadReset, $IRSReset]
@@ -53,12 +57,18 @@ func _start_round():
 			var box = load("res://banana_box.tscn")
 			var new_box = box.instantiate()
 			get_tree().current_scene.add_child(new_box)
+			music.SetTrack(1)
 		2:
 			respawn_timers[2].start()
 			respawn_timers[2].timeout.connect(_spawn_irs)
 			var box_set = load("res://pie_set.tscn")
 			var new_set = box_set.instantiate()
 			get_tree().current_scene.add_child(new_set)
+			music.IRS()
+			irs_anim.play("IRS")
+			await music.finished
+			irs_graphic.visible = false
+			center_text.text = "[center]The IRS are here to enforce their new laughter tax!\nStop them with pies![/center]"
 			
 	for i in range(sheep_counts[round_number]):
 		SpawnSheep()

@@ -27,7 +27,7 @@ func _bored_behavior():
 func _laughing_behavior():
 	var my_pos = tilemap_object.cell_position
 	var end_pos = trailer_position
-	var p : Array[Vector2i] = pathfinding.FindPath(my_pos, end_pos)
+	var p : Array[Vector2i] = pathfinding.FindPath(my_pos, end_pos, false)
 	if p.size() > 1:
 		tilemap_object.MoveToCell(p[1])
 	elif my_pos == end_pos:
