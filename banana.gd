@@ -1,7 +1,9 @@
 extends Sprite2D
 
 @export var trip_time : float = 2
-@export var remove_delay : float = 0.25
+@export var remove_delay : float = 1.5
+@export var horizontal_force : float = 50
+@export var vertical_force : float = 50
 var tilemap_object : Node
 var rb2d : RigidBody2D
 
@@ -21,7 +23,8 @@ func EntryTrigger(entrant) -> bool: #triggers when something tries to step on th
 func _self_remove():
 	z_index = 500
 	rb2d.freeze = false
-	rb2d.apply_impulse(Vector2(randf_range(-50, 50), -50))
+	rb2d.apply_impulse(Vector2(randf_range(-horizontal_force, horizontal_force), -vertical_force))
+	rotation_degrees = randf_range(0, 360)
 	rb2d.reparent(get_tree().current_scene)
 	reparent(rb2d)
 	tilemap_object.Remove(false)

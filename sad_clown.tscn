@@ -69,7 +69,7 @@ fill_mode = 3
 texture_under = ExtResource("5_jnp5g")
 texture_progress = ExtResource("6_l8uy4")
 script = ExtResource("7_eu40y")
-laugh_sources = Array[String](["unspecified", "tickle", "laugh", "bad_joke"])
+laugh_sources = Array[String](["laugh"])
 drain_rate = 0.0
 
 [node name="Timer" type="Timer" parent="LaughMeter"]

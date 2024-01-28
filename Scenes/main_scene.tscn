@@ -1,5 +1,6 @@
-[gd_scene load_steps=22 format=3 uid="uid://c1s4kykt7sebs"]
+[gd_scene load_steps=23 format=3 uid="uid://c1s4kykt7sebs"]
 
+[ext_resource type="Texture2D" uid="uid://dlfd7l0rtrtgd" path="res://sprites/mainclown_sheet.png" id="1_b4sce"]
 [ext_resource type="Texture2D" uid="uid://cru6d25lgjfqw" path="res://sprites/laugh_face.png" id="1_ppuft"]
 [ext_resource type="Script" path="res://Player.gd" id="2_k5ot5"]
 [ext_resource type="Texture2D" uid="uid://2g3ydmw3ync8" path="res://sprites/banana.png" id="3_6ak6d"]
@@ -433,7 +434,9 @@ y_sort_enabled = true
 [node name="Player" type="Sprite2D" parent="."]
 y_sort_enabled = true
 position = Vector2(267, 92)
-texture = ExtResource("1_ppuft")
+texture = ExtResource("1_b4sce")
+region_enabled = true
+region_rect = Rect2(0, 0, 22, 20)
 script = ExtResource("2_k5ot5")
 laugh_square_range = 2
 item_quantity = 5
@@ -453,6 +456,12 @@ position_smoothing_speed = 0.5
 script = ExtResource("3_jc4s2")
 map = NodePath("../../TileMap")
 
+[node name="CreatureSprite" type="Node" parent="Player"]
+script = ExtResource("18_empag")
+animate_speed = 6.0
+sprite_size = Vector2i(22, 20)
+sprite_cells = Vector2i(4, 3)
+
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
 tile_set = SubResource("TileSet_yrj0a")
@@ -471,6 +480,10 @@ one_shot = true
 
 [node name="SadReset" type="Timer" parent="EntitySpawner"]
 wait_time = 10.0
+one_shot = true
+
+[node name="IRSReset" type="Timer" parent="EntitySpawner"]
+wait_time = 6.0
 one_shot = true
 
 [node name="AngryClown" parent="." instance=ExtResource("7_p8803")]
