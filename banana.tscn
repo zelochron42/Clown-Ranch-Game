@@ -7,8 +7,13 @@
 [node name="Banana" type="Sprite2D"]
 texture = ExtResource("1_ro3do")
 script = ExtResource("1_us577")
-remove_delay = 0.5
+remove_delay = 1.5
 
 [node name="TilemapObject" type="Node" parent="."]
 script = ExtResource("1_2vfbj")
 move_time = 0.8
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+gravity_scale = 0.3
+can_sleep = false
+freeze = true

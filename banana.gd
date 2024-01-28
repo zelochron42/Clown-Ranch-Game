@@ -3,9 +3,11 @@ extends Sprite2D
 @export var trip_time : float = 2
 @export var remove_delay : float = 0.25
 var tilemap_object : Node
+var rb2d : RigidBody2D
 
 func _ready():
 	tilemap_object = $TilemapObject
+	rb2d = $RigidBody2D
 
 func _process(delta):
 	pass
@@ -17,5 +19,11 @@ func EntryTrigger(entrant) -> bool: #triggers when something tries to step on th
 	return true
 	
 func _self_remove():
+	z_index = 500
+	rb2d.freeze = false
+	rb2d.apply_impulse(Vector2(randf_range(-50, 50), -50))
+	rb2d.reparent(get_tree().current_scene)
+	reparent(rb2d)
+	tilemap_object.Remove(false)
 	await get_tree().create_timer(remove_delay).timeout
-	tilemap_object.Remove()
+	queue_free()

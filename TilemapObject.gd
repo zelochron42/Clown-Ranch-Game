@@ -77,6 +77,7 @@ func _check_direction(direction : Vector2i):
 		Vector2i.RIGHT:
 			movedirection.emit(3)
 	
-func Remove():
+func Remove(delete : bool = true):
 	map.objects.erase(parent)
-	parent.queue_free()
+	if delete:
+		parent.queue_free()
